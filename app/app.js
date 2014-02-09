@@ -6,12 +6,14 @@
         dependencies = [
             'angular',
             'ui.bootstrap',
-            'ui.router'
+            'ui.router',
+            'app.books'
         ],
 
         angularDependencies = [
             'ui.router',
-            'ui.bootstrap'
+            'ui.bootstrap',
+            'app.books'
         ];
 
     define(dependencies, function(angular) {
@@ -21,7 +23,36 @@
         module.config(['$stateProvider', '$urlRouterProvider',
             function($stateProvider, $urlRouteProvider) {
 
-                $urlRouteProvider.otherwise('/');
+                $urlRouteProvider.otherwise('');
+
+                $stateProvider.state('app', {
+                    url: '',
+                    views: {
+                        'nav': {
+                            templateUrl: 'common/nav/_nav.html'
+                        },
+                        'main': {
+                            template: '<div class="app clearfix" ui-view></div>'
+                        }
+                    }
+                });
+            }
+        ]);
+
+        module.controller('appCtrl', ['$scope', '$state',
+            function($scope, $state) {
+                console.log('appCtrl');
+            }
+        ]);
+
+        module.run(['$rootScope', '$state', '$stateParams',
+            function($rootScope, $state, $stateParams) {
+                $rootScope.$state       = $state;
+                $rootScope.$stateParams = $stateParams;
+
+                $rootScope.$on('$routeChangeError', function() {
+                    console.log('failed to change routes', arguments);
+                });
             }
         ]);
 
