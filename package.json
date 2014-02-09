@@ -1,28 +1,27 @@
 {
-    "name": "reading-list",
-    "version": "0.0.1",
-    "description": "A simple app to keep track of books you've read",
-    "keywords": [],
-    "homepage": "",
-    "license": "MIT",
-    "author": {
-        "name": "Will",
-        "email": "will@coefficientinc.com"
-    },
-    "files": [],
-    "main": "",
-    "repository": "",
-    "devDependencies": {
-        "grunt": "~0.4.1",
-        "bower": "~0.9.2",
-        "grunt-contrib-concat": "~0.3.0",
-        "grunt-contrib-jshint": "~0.7.2",
-        "grunt-contrib-uglify": "~0.2.4",
-        "load-grunt-tasks": "~0.2.0",
-        "node-sass": "~0.8.1",
-        "grunt-sass": "~0.10.0"
-    },
-    "engines": {
-        "node": ">=0.8.0"
-    }
+  "name": "reading-list",
+  "version": "0.0.1",
+  "description": "A simple app to keep track of books you've read",
+  "keywords": [],
+  "homepage": "",
+  "license": "MIT",
+  "author": {
+    "name": "Will",
+    "email": "will@coefficientinc.com"
+  },
+  "files": [],
+  "main": "",
+  "repository": "",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "bower": "~0.9.2",
+    "grunt-contrib-jshint": "~0.7.2",
+    "load-grunt-tasks": "~0.2.0",
+    "node-sass": "~0.8.1",
+    "grunt-sass": "~0.10.0",
+    "lodash": "~2.4.1"
+  },
+  "engines": {
+    "node": ">=0.8.0"
+  }
 }

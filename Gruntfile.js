@@ -1,13 +1,24 @@
 'use strict';
 module.exports = function (grunt) {
-    var _ = require('lodash');
+    // var _ = require('lodash');
 
     require('load-grunt-tasks')(grunt);
 
-    var sourceMapLoc   = '';
-    var sassPatterns   = [];
-    var jsPatterns     = [];
-    var ignorePatterns = [];
+    var sourceMapLoc   = 'app.css.map';
+
+    var sassPatterns   = [
+        'app/common/sass/**/*.scss'
+    ];
+
+    var jsPatterns     = [
+        'Gruntfile.js',
+        'app/common/*.js',
+        'app/common/**/*.js'
+    ];
+
+    var ignorePatterns = [
+        'app/bower_components/**'
+    ];
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -23,45 +34,23 @@ module.exports = function (grunt) {
         },
         // https://github.com/sindresorhus/grunt-sass
         sass: {
-            'dev-core': {
+            'app': {
                 options: {
                     outputStyle: 'expanded',
                     sourceComments: 'map',
                     sourceMap: sourceMapLoc
                 },
                 files: {
-                    'app.css': 'src/sass/app.scss'
-                }
-            }
-        },
-        concat: {
-            options: {
-                banner: '<%= meta.banner %>'
-            },
-            dist: {
-                files: {
-                    'dist/main.js': 'src/js/*.js'
-                }
-            }
-        },
-        uglify: {
-            options: {
-                banner: '<%= meta.banner %>'
-            },
-            dist: {
-                files: {
-                    'dist/main.min.js': 'src/js/*.js'
+                    'app/app.css': 'app/common/sass/app.scss'
                 }
             }
         },
         jshint: {
             options: {
-                jshintrc: '.jshintrc'
+                jshintrc: '.jshintrc',
+                ignore: ignorePatterns
             },
-            all: [
-                'Gruntfile.js',
-                'src/js/*.js'
-            ]
+            all: jsPatterns
         },
         // https://github.com/nDmitry/grunt-autoprefixer
         autoprefixer: {
@@ -97,7 +86,7 @@ module.exports = function (grunt) {
                 },
                 files: sassPatterns,
                 tasks: [
-                    'sass:dev-core'
+                    'sass:app'
                 ]
             }
         }
@@ -118,9 +107,6 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('release', [
-        'jshint',
-        'concat',
-        'uglify',
-        'bower'
+        'jshint'
     ]);
 };
