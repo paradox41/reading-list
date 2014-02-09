@@ -2,6 +2,9 @@ require.config({
     baseUrl: '.',
     deps: ['angular', 'app'],
     paths: {
+        // modules
+        'app.books': 'books/books',
+
         // AngularJS Modules
         'angular': 'bower_components/angular/angular',
         'ui.bootstrap': 'bower_components/angular-bootstrap/ui-bootstrap-tpls',
