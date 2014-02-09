@@ -8,6 +8,9 @@
 // le strap of le boot
 @import "bootstrap";
 
+// yeti theme
+@import "_bootswatch.scss";
+
 // font awesome - this needs to be here because we are pointing to a different font folder
 // http://fortawesome.github.io/Font-Awesome/icons/
 @import "../../bower_components/font-awesome/scss/font-awesome";
