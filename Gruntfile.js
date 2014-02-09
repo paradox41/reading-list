@@ -1,12 +1,14 @@
 'use strict';
 module.exports = function (grunt) {
     // var _ = require('lodash');
-
+    // https://github.com/sindresorhus/time-grunt
+    require('time-grunt')(grunt);
     require('load-grunt-tasks')(grunt);
 
     var sourceMapLoc   = 'app.css.map';
 
     var sassPatterns   = [
+        'app/common/sass/*.scss',
         'app/common/sass/**/*.scss'
     ];
 
@@ -34,7 +36,7 @@ module.exports = function (grunt) {
         },
         // https://github.com/sindresorhus/grunt-sass
         sass: {
-            'app': {
+            'dev': {
                 options: {
                     outputStyle: 'expanded',
                     sourceComments: 'map',
@@ -86,7 +88,7 @@ module.exports = function (grunt) {
                 },
                 files: sassPatterns,
                 tasks: [
-                    'sass:app'
+                    'sass:dev'
                 ]
             }
         }
@@ -95,10 +97,6 @@ module.exports = function (grunt) {
     grunt.registerTask('default', [
         'jshint',
         'sass',
-        'watch:development'
-    ]);
-
-    grunt.registerTask('watch', [
         'watch:development'
     ]);
 
