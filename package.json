@@ -19,9 +19,13 @@
     "load-grunt-tasks": "~0.2.0",
     "node-sass": "~0.8.1",
     "grunt-sass": "~0.10.0",
-    "lodash": "~2.4.1"
+    "lodash": "~2.4.1",
+    "grunt-contrib-watch": "~0.5.3"
   },
   "engines": {
     "node": ">=0.8.0"
+  },
+  "dependencies": {
+    "time-grunt": "~0.2.9"
   }
 }
