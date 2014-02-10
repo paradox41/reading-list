@@ -13,11 +13,11 @@ app.configure(function() {
 var Book = mongoose.model('Book', {
     title: String,
     author: String,
-    numberOfPages: Number,
-    dateStarted: Date,
-    dateFinished: Date,
-    createdOn: Date,
-    updatedOn: Date
+    number_of_pages: Number,
+    date_started: Date,
+    date_finished: Date,
+    created_on: Date,
+    updated_on: Date
 });
 
 // api stuff
