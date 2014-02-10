@@ -21,6 +21,7 @@ require.config({
         'angular': {
             exports: 'angular'
         },
+        'ngResource': ['angular'],
         'ui.router': ['angular'],
         'ui.bootstrap': ['angular'],
         'lodash': {
