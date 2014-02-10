@@ -7,13 +7,15 @@
             'angular',
             'ui.bootstrap',
             'ui.router',
-            'app.books'
+            'app.books',
+            'app.stats'
         ],
 
         angularDependencies = [
             'ui.router',
             'ui.bootstrap',
-            'app.books'
+            'app.books',
+            'app.stats'
         ];
 
     define(dependencies, function(angular) {
