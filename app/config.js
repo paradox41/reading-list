@@ -4,6 +4,7 @@ require.config({
     paths: {
         // modules
         'app.books': 'books/books',
+        'app.stats': 'stats/stats',
 
         // AngularJS Modules
         'angular': 'bower_components/angular/angular',
