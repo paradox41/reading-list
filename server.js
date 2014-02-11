@@ -41,10 +41,10 @@ app.post('/api/books', function(request, response) {
     Book.create({
         title: request.body.title,
         author: request.body.author,
-        number_of_pages: request.body.numberOfPages,
-        date_started: request.body.dateStarted,
-        date_finished: request.body.dateFinished,
-        created_on: new Date(),
+        number_of_pages: request.body.number_of_pages,
+        date_started: request.body.date_started,
+        date_finished: request.body.date_finished,
+        created_on: request.body.created_on,
         updated_on: new Date()
     }, function(error, book) {
         if (error) {
