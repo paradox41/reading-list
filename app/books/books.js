@@ -23,9 +23,14 @@
         module.config(['$stateProvider',
             function($stateProvider) {
 
-                $stateProvider.state('app.books', {
+                $stateProvider
+                .state('app.books', {
                     controller: 'BooksCtrl',
                     url: '/books',
+                    templateUrl: 'books/_books.html'
+                }).state('app.books.edit', {
+                    controller: 'BooksCtrl',
+                    url: '/:bookId/edit',
                     templateUrl: 'books/_books.html'
                 });
             }
@@ -76,8 +81,9 @@
                 };
 
                 // begin datepicker options
-                $scope.openedStart  = false;
+                $scope.openedStart = false;
                 $scope.openedFinish = false;
+                $scope.maxDate = new Date();
 
                 $scope.today = function() {
                     $scope.dt = new Date();
