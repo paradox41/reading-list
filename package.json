@@ -23,7 +23,8 @@
     "grunt-contrib-watch": "~0.5.3",
     "grunt-cli": "~0.1.13",
     "yo": "~1.1.2",
-    "generator-ng-module": "~0.1.2"
+    "generator-ng-module": "~0.1.2",
+    "grunt-shell-spawn": "~0.3.0"
   },
   "engines": {
     "node": ">=0.8.0"
