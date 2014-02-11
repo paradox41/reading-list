@@ -8,14 +8,12 @@
             'ui.router',
             'ui.bootstrap',
             'ngResource'
-            // 'app.api'
         ],
 
         angularDependencies = [
             'ui.router',
             'ui.bootstrap',
             'ngResource'
-            // 'app.api'
         ];
 
     define(dependencies, function(angular) {
@@ -41,11 +39,9 @@
 
                 $scope.books = Books.query();
 
-                debugger;
-
                 $scope.today = function() {
                     $scope.dt = new Date();
-                }
+                };
                 $scope.today();
 
                 $scope.showWeeks = true;
@@ -75,7 +71,7 @@
                 };
 
                 $scope.dateOptions = {
-                    'year-format': "'yy'",
+                    'year-format': '\'yy\'',
                     'starting-day': 1
                 };
 
