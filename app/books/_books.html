@@ -35,7 +35,7 @@
             <div class="form-group">
                 <label for="Date finished">Date finished</label>
                 <p class="input-group">
-                    <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="newBook.date_finished" is-open="openedFinish" min="newBook.date_started" close-text="Close" />
+                    <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="newBook.date_finished" is-open="openedFinish" min="newBook.date_started" max="maxDate" close-text="Close" />
                     <span class="input-group-btn">
                         <button class="btn btn-default" ng-click="openFinish($event)">
                             <i class="glyphicon glyphicon-calendar"></i>
