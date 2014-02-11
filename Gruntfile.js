@@ -14,6 +14,8 @@ module.exports = function (grunt) {
 
     var jsPatterns     = [
         'Gruntfile.js',
+        'app/*.js',
+        'app/**/*.js',
         'app/common/*.js',
         'app/common/**/*.js'
     ];
@@ -47,10 +49,30 @@ module.exports = function (grunt) {
                 }
             }
         },
+        // https://github.com/cri5ti/grunt-shell-spawn
+        // shit blocks the watch task -.-
+        shell: {
+            'mongo': {
+                command: 'mongod',
+                options: {
+                    async: true
+                }
+            },
+            'node': {
+                command: 'nodemon server.js',
+                options: {
+                    async: true
+                }
+            },
+            options: {
+                stdout: true
+            }
+        },
+        // https://github.com/gruntjs/grunt-contrib-jshint
         jshint: {
             options: {
                 jshintrc: '.jshintrc',
-                ignore: ignorePatterns
+                ignores: ignorePatterns
             },
             all: jsPatterns
         },
@@ -95,6 +117,8 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('default', [
+        // 'shell:mongo',
+        // 'shell:node',
         'jshint',
         'sass',
         'watch:development'
