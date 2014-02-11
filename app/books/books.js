@@ -35,16 +35,58 @@
             function($scope, $state, $http, $resource) {
                 console.log('BooksCtrl');
 
-                var Books = $resource('/api/books');
+                var Book = $resource('/api/books', {}, {
+                    'save': {
+                        method: 'POST',
+                        isArray: true
+                    }
+                });
 
-                $scope.books = Books.query();
+                var books = Book.query(function() {
+                    $scope.books = books;
+                    console.log('All books: ', $scope.books);
+                });
+
+                $scope.newBook = {
+                    title: null,
+                    author: null,
+                    number_of_pages: null,
+                    date_started: null,
+                    date_finished: null,
+                    created_on: new Date()
+                };
+
+                $scope.addBook = function() {
+                    var newBook = new Book($scope.newBook);
+
+                    newBook.$save(function(response) {
+                        console.log(response);
+                    });
+
+                    // $scope.books.push($scope.newBook);
+                    $scope._clearBook();
+                };
+
+                $scope._clearBook = function() {
+                    for (var prop in $scope.newBook) {
+                        if ($scope.newBook.hasOwnProperty(prop) && prop !== 'created_on') {
+                            $scope.newBook[prop] = null;
+                        }
+                    }
+                };
+
+                // begin datepicker options
+                $scope.openedStart  = false;
+                $scope.openedFinish = false;
 
                 $scope.today = function() {
                     $scope.dt = new Date();
                 };
+
                 $scope.today();
 
                 $scope.showWeeks = true;
+
                 $scope.toggleWeeks = function() {
                     $scope.showWeeks = !$scope.showWeeks;
                 };
@@ -53,30 +95,21 @@
                     $scope.dt = null;
                 };
 
-                // Disable weekend selection
-                $scope.disabled = function(date, mode) {
-                    return (mode === 'day' && (date.getDay() === 0 || date.getDay() === 6));
-                };
-
-                $scope.toggleMin = function() {
-                    $scope.minDate = ($scope.minDate) ? null : new Date();
-                };
-                $scope.toggleMin();
-
-                $scope.open = function($event) {
+                $scope.openStart = function($event) {
                     $event.preventDefault();
                     $event.stopPropagation();
 
-                    $scope.opened = true;
+                    $scope.openedStart = !$scope.openedStart;
                 };
 
-                $scope.dateOptions = {
-                    'year-format': '\'yy\'',
-                    'starting-day': 1
+                $scope.openFinish = function($event) {
+                    $event.preventDefault();
+                    $event.stopPropagation();
+
+                    $scope.openedFinish = !$scope.openedFinish;
                 };
 
-                $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'shortDate'];
-                $scope.format = $scope.formats[0];
+                $scope.format = 'MMMM-dd-yyyy';
             }
         ]);
 
