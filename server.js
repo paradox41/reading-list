@@ -1,7 +1,7 @@
 'use strict';
 
-var express  = require('express');
-var app      = express();
+var express = require('express');
+var app = express();
 var mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost');
@@ -23,6 +23,8 @@ var Book = mongoose.model('Book', {
 });
 
 // api stuff
+
+// get all books
 app.get('/api/books', function(request, response) {
 
     Book.find(function(error, books) {
@@ -36,6 +38,19 @@ app.get('/api/books', function(request, response) {
     });
 });
 
+// get one book
+app.get('/api/books/:book_id', function(request, response) {
+
+    Book.findById(request.params.book_id).exec(function(error, book) {
+        if (error) {
+            response.send(error);
+        }
+
+        response.json(book);
+    });
+});
+
+// create a new book
 app.post('/api/books', function(request, response) {
 
     console.log('request: ', request);
@@ -63,6 +78,24 @@ app.post('/api/books', function(request, response) {
     });
 });
 
+app.post('/api/books/:book_id', function(request, response) {
+    Book.findByIdAndUpdate(request.params.book_id, {
+        title: request.body.title,
+        author: request.body.author,
+        number_of_pages: request.body.number_of_pages,
+        date_started: request.body.date_started,
+        date_finished: request.body.date_finished,
+        updated_on: new Date()
+    }, function(error, book) {
+        if (error) {
+            response.send(error);
+        }
+
+        response.json(book);
+    });
+});
+
+// delete a book
 app.delete('/api/books/:book_id', function(request, response) {
     Book.remove({
         _id: request.params.book_id
