@@ -5,18 +5,21 @@
 
         dependencies = [
             'angular',
+            'moment',
             'ui.router',
             'ui.bootstrap',
-            'ngResource'
+            'restangular',
+            'app.common.filters'
         ],
 
         angularDependencies = [
             'ui.router',
             'ui.bootstrap',
-            'ngResource'
+            'restangular',
+            'app.common.filters'
         ];
 
-    define(dependencies, function(angular) {
+    define(dependencies, function(angular, moment) {
 
         var module = angular.module(moduleName, angularDependencies);
 
@@ -28,28 +31,36 @@
                     controller: 'BooksCtrl',
                     url: '/books',
                     templateUrl: 'books/_books.html'
-                }).state('app.books.edit', {
-                    controller: 'BooksCtrl',
+                })
+                .state('app.books.new', {
+                    url: '/new',
+                    views: {
+                        'main@': {
+                            controller: 'BooksCtrl',
+                            templateUrl: 'books/_books_form.html'
+                        }
+                    }
+                })
+                .state('app.books.edit', {
                     url: '/:bookId/edit',
-                    templateUrl: 'books/_books.html'
+                    views: {
+                        'main@': {
+                            controller: 'BooksEditCtrl',
+                            templateUrl: 'books/_books_form.html'
+                        }
+                    }
                 });
             }
         ]);
 
-        module.controller('BooksCtrl', ['$scope', '$state', '$http', '$resource',
-            function($scope, $state, $http, $resource) {
+        module.controller('BooksCtrl', ['$scope', '$state', 'Restangular',
+            function($scope, $state, Restangular) {
                 console.log('BooksCtrl');
 
-                var Book = $resource('/api/books', {}, {
-                    'save': {
-                        method: 'POST',
-                        isArray: true
-                    }
-                });
+                var books = Restangular.all('books');
 
-                var books = Book.query(function() {
+                books.getList().then(function(books) {
                     $scope.books = books;
-                    console.log('All books: ', $scope.books);
                 });
 
                 $scope.newBook = {
@@ -62,14 +73,10 @@
                 };
 
                 $scope.addBook = function() {
-                    var newBook = new Book($scope.newBook);
-
-                    newBook.$save(function(response) {
-                        console.log(response);
+                    books.post($scope.newBook).then(function(response) {
+                        $scope.books.push($scope.newBook);
+                        $scope._clearBook();
                     });
-
-                    // $scope.books.push($scope.newBook);
-                    $scope._clearBook();
                 };
 
                 $scope._clearBook = function() {
@@ -116,6 +123,22 @@
                 };
 
                 $scope.format = 'MMMM-dd-yyyy';
+            }
+        ]);
+
+        module.controller('BooksEditCtrl', ['$scope', '$state', '$stateParams', 'Restangular',
+            function($scope, $state, $stateParams, Restangular) {
+                console.log('BooksEditCtrl');
+
+                var currentBook = Restangular.one('books', $stateParams.bookId);
+
+                 currentBook.get().then(function(book) {
+                    $scope.book = book;
+                 });
+
+                $scope.saveBook = function() {
+                    currentBook.post();
+                };
             }
         ]);
 
