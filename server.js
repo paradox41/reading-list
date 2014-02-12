@@ -38,6 +38,8 @@ app.get('/api/books', function(request, response) {
 
 app.post('/api/books', function(request, response) {
 
+    console.log('request: ', request);
+
     Book.create({
         title: request.body.title,
         author: request.body.author,
@@ -51,12 +53,12 @@ app.post('/api/books', function(request, response) {
             response.send(error);
         }
 
-        Book.find(function(error, books) {
+        Book.findById(book._id).exec(function(error, book) {
             if (error) {
                 response.send(error);
             }
 
-            response.json(books);
+            response.json(book);
         });
     });
 });
