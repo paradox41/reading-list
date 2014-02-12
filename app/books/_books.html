@@ -18,7 +18,9 @@
         </thead>
         <tbody>
             <tr ng-repeat="book in books">
-                <td>{{book.title}}</td>
+                <td>
+                    <a href="" ui-sref="app.books.edit({ bookId: book._id })">{{book.title}}</a>
+                </td>
                 <td>{{book.author}}</td>
                 <td>{{book.number_of_pages}}</td>
                 <td>{{book.date_started | humanizeTime}}</td>

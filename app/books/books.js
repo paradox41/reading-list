@@ -6,6 +6,7 @@
         dependencies = [
             'angular',
             'moment',
+            'lodash',
             'ui.router',
             'ui.bootstrap',
             'restangular',
@@ -19,7 +20,7 @@
             'app.common.filters'
         ];
 
-    define(dependencies, function(angular, moment) {
+    define(dependencies, function(angular, moment, _) {
 
         var module = angular.module(moduleName, angularDependencies);
 
@@ -30,7 +31,14 @@
                 .state('app.books', {
                     controller: 'BooksCtrl',
                     url: '/books',
-                    templateUrl: 'books/_books.html'
+                    templateUrl: 'books/_books.html',
+                    resolve: {
+                        'books': ['Restangular',
+                            function(Restangular) {
+                                return Restangular.all('books');
+                            }
+                        ]
+                    }
                 })
                 .state('app.books.new', {
                     url: '/new',
@@ -53,11 +61,11 @@
             }
         ]);
 
-        module.controller('BooksCtrl', ['$scope', '$state', 'Restangular',
-            function($scope, $state, Restangular) {
+        module.controller('BooksCtrl', ['$scope', '$state', 'Restangular', 'books',
+            function($scope, $state, Restangular, books) {
                 console.log('BooksCtrl');
 
-                var books = Restangular.all('books');
+                // var books = Restangular.all('books');
 
                 books.getList().then(function(books) {
                     $scope.books = books;
@@ -126,18 +134,18 @@
             }
         ]);
 
-        module.controller('BooksEditCtrl', ['$scope', '$state', '$stateParams', 'Restangular',
-            function($scope, $state, $stateParams, Restangular) {
-                console.log('BooksEditCtrl');
+        module.controller('BooksEditCtrl', ['$scope', '$state', '$stateParams', 'Restangular', 'books',
+            function($scope, $state, $stateParams, Restangular, books) {
+                console.log('BooksEditCtrl', books);
 
-                var currentBook = Restangular.one('books', $stateParams.bookId);
-
-                 currentBook.get().then(function(book) {
-                    $scope.book = book;
-                 });
+                books.getList().then(function(books) {
+                    $scope.book = _.find(books, { '_id': $stateParams.bookId });
+                });
 
                 $scope.saveBook = function() {
-                    currentBook.post();
+                    books.post('', $scope.book).then(function(response) {
+                        console.log('post response', response);
+                    });
                 };
             }
         ]);

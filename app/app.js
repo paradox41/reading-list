@@ -49,7 +49,7 @@
                 });
                 RestangularProvider.setRestangularFields({
                     // because mongo stores _id
-                    id: "_id"
+                    id: '_id'
                 });
             }
         ]);

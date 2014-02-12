@@ -78,7 +78,10 @@ app.post('/api/books', function(request, response) {
     });
 });
 
+// update a book
 app.post('/api/books/:book_id', function(request, response) {
+    console.log('Updating book: ', request.params, request.body);
+
     Book.findByIdAndUpdate(request.params.book_id, {
         title: request.body.title,
         author: request.body.author,
