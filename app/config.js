@@ -3,7 +3,8 @@ require.config({
     deps: ['angular', 'app'],
     paths: {
         // modules
-        'app.api': 'common/api',
+        'app.common.api': 'common/api',
+        'app.common.filters': 'common/filters',
         'app.books': 'books/books',
         'app.stats': 'stats/stats',
 
