@@ -9,7 +9,7 @@ require.config({
 
         // AngularJS Modules
         'angular': 'bower_components/angular/angular',
-        'ngResource': 'bower_components/angular-resource/angular-resource',
+        'restangular': 'bower_components/restangular/dist/restangular',
         'ui.bootstrap': 'bower_components/angular-bootstrap/ui-bootstrap-tpls',
         'ui.router': 'bower_components/angular-ui-router/release/angular-ui-router',
 
@@ -21,7 +21,7 @@ require.config({
         'angular': {
             exports: 'angular'
         },
-        'ngResource': ['angular'],
+        'restangular': ['angular', 'lodash'],
         'ui.router': ['angular'],
         'ui.bootstrap': ['angular'],
         'lodash': {
