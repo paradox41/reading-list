@@ -1,49 +1,30 @@
-<div class="col-md-4">
-    <ul class="nav nav-pills nav-stacked">
-        <li ng-repeat="book in books">{{book.title}}
-            <small>{{book.author}}</small>
-        </li>
-    </ul>
-</div>
-<div class="col-md-8">
-    <form role="form" ng-submit="addBook()">
-        <fieldset>
-            <legend>What have you read lately?</legend>
-            <div class="form-group">
-                <label for="Title">Title</label>
-                <input type="text" class="form-control" placeholder="Book title" ng-model="newBook.title">
-            </div>
-            <div class="form-group">
-                <label for="Author">Author</label>
-                <input type="text" class="form-control" placeholder="Book author" ng-model="newBook.author">
-            </div>
-            <div class="form-group">
-                <label for="Number of pages">Number of pages</label>
-                <input type="text" class="form-control" placeholder="Number of pages" ng-model="newBook.number_of_pages">
-            </div>
-            <div class="form-group">
-                <label for="Date started">Date started</label>
-                <p class="input-group">
-                    <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="newBook.date_started" is-open="openedStart" ng-required="true" close-text="Close" />
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" ng-click="openStart($event)">
-                            <i class="glyphicon glyphicon-calendar"></i>
-                        </button>
-                    </span>
-                </p>
-            </div>
-            <div class="form-group">
-                <label for="Date finished">Date finished</label>
-                <p class="input-group">
-                    <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="newBook.date_finished" is-open="openedFinish" min="newBook.date_started" max="maxDate" close-text="Close" />
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" ng-click="openFinish($event)">
-                            <i class="glyphicon glyphicon-calendar"></i>
-                        </button>
-                    </span>
-                </p>
-            </div>
-            <button type="submit" class="btn btn-default">Add</button>
-        </fieldset>
-    </form>
+<div class="col-md-12">
+    <button type="button" class="btn btn-default btn-lg btn-block">
+        <a href="" ui-sref="app.books.new">Add a book</a>
+    </button>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Pages</th>
+                <th>Started</th>
+                <th>Finished</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="book in books">
+                <td>{{book.title}}</td>
+                <td>{{book.author}}</td>
+                <td>{{book.number_of_pages}}</td>
+                <td>{{book.date_started | humanizeTime}}</td>
+                <td>{{book.date_finished | humanizeTime | default:'-'}}</td>
+                <td>
+                    <a href="" ui-sref="app.books.edit({ bookId: book._id })"><i class="fa fa-2x fa-pencil"></i></a>
+                    <a href=""><i class="fa fa-2x fa-trash-o"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>
