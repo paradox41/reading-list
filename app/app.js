@@ -7,6 +7,7 @@
             'angular',
             'ui.bootstrap',
             'ui.router',
+            'restangular',
             'app.books',
             'app.stats'
         ],
@@ -14,6 +15,7 @@
         angularDependencies = [
             'ui.router',
             'ui.bootstrap',
+            'restangular',
             'app.books',
             'app.stats'
         ];
@@ -22,8 +24,8 @@
 
         var module = angular.module(moduleName, angularDependencies);
 
-        module.config(['$stateProvider', '$urlRouterProvider',
-            function($stateProvider, $urlRouteProvider) {
+        module.config(['$stateProvider', '$urlRouterProvider', 'RestangularProvider',
+            function($stateProvider, $urlRouteProvider, RestangularProvider) {
 
                 $urlRouteProvider.otherwise('');
 
@@ -38,6 +40,17 @@
                         }
                     }
                 });
+
+                // Restangular settings
+                RestangularProvider.setBaseUrl('api/');
+                RestangularProvider.setResponseExtractor(function(response, operation) {
+                    console.log('Response Extractor', response, operation);
+                    return response;
+                });
+                RestangularProvider.setRestangularFields({
+                    // because mongo stores _id
+                    id: "_id"
+                });
             }
         ]);
 
@@ -49,7 +62,7 @@
 
         module.run(['$rootScope', '$state', '$stateParams',
             function($rootScope, $state, $stateParams) {
-                $rootScope.$state       = $state;
+                $rootScope.$state = $state;
                 $rootScope.$stateParams = $stateParams;
 
                 $rootScope.$on('$routeChangeError', function() {
