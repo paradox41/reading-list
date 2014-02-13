@@ -65,16 +65,11 @@
             function($scope, $state, Restangular, books) {
                 console.log('BooksCtrl', books);
 
+                $scope.reverse = true;
+
                 books.getList().then(function(books) {
                     $scope.books = books;
                 });
-
-                $scope.saveBook = function() {
-                    books.post($scope.book).then(function(response) {
-                        $scope.books.push($scope.book);
-                        $scope._clearBook();
-                    });
-                };
 
                 $scope.deleteBook = function(bookId) {
                     var index = _.findIndex($scope.books, {
@@ -85,14 +80,6 @@
                     });
                     $scope.books.splice(index, 1);
                 };
-
-                $scope._clearBook = function() {
-                    for (var prop in $scope.book) {
-                        if ($scope.book.hasOwnProperty(prop) && prop !== 'created_on') {
-                            $scope.book[prop] = null;
-                        }
-                    }
-                };
             }
         ]);
 
@@ -101,10 +88,8 @@
                 console.log('BooksEditCtrl', books);
 
                 if ($stateParams.bookId) {
-                    books.getList().then(function(books) {
-                        $scope.book = _.find(books, {
-                            '_id': $stateParams.bookId
-                        });
+                    books.get($stateParams.bookId).then(function(book) {
+                        $scope.book = book;
                     });
                 } else {
                     $scope.book = {
@@ -117,10 +102,23 @@
                     };
                 }
 
+                // $scope.saveBook = function() {
+                //     books.post($scope.book).then(function(response) {
+                //         $scope.books.push($scope.book);
+                //         $scope._clearBook();
+                //     });
+                // };
+
                 $scope.saveBook = function() {
-                    $scope.book.post().then(function(response) {
-                        console.log('post response', response);
-                    });
+                    if ($stateParams.bookId) {
+                        $scope.book.post().then(function(response) {
+                            console.log(response);
+                        });
+                    } else {
+                        books.post($scope.book).then(function(response) {
+                            $state.transitionTo('app.books');
+                        });
+                    }
                 };
 
                 // begin datepicker options
