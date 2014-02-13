@@ -1,8 +1,6 @@
 <div class="col-md-12">
     <div class="margin-bottom">
-        <button type="button" class="btn btn-primary pull-right">
-            <a href="" ui-sref="app.books.new">Add a book</a>
-        </button>
+        <a class="btn btn-primary pull-right" href="" ui-sref="app.books.new">Add a book</a>
         <h1>Reading list</h1>
     </div>
     <table class="table table-striped table-hover">
@@ -29,7 +27,7 @@
                     <a href="" ui-sref="app.books.edit({ bookId: book._id })">
                         <i class="fa fa-2x fa-pencil"></i>
                     </a>
-                    <a href="">
+                    <a href="" ng-click="deleteBook(book._id)">
                         <i class="fa fa-2x fa-trash-o"></i>
                     </a>
                 </td>

@@ -26,7 +26,6 @@ var Book = mongoose.model('Book', {
 
 // get all books
 app.get('/api/books', function(request, response) {
-
     Book.find(function(error, books) {
         // if there is an error, send the error
         if (error) {
@@ -40,7 +39,6 @@ app.get('/api/books', function(request, response) {
 
 // get one book
 app.get('/api/books/:book_id', function(request, response) {
-
     Book.findById(request.params.book_id).exec(function(error, book) {
         if (error) {
             response.send(error);
@@ -52,9 +50,6 @@ app.get('/api/books/:book_id', function(request, response) {
 
 // create a new book
 app.post('/api/books', function(request, response) {
-
-    console.log('request: ', request);
-
     Book.create({
         title: request.body.title,
         author: request.body.author,
@@ -80,8 +75,6 @@ app.post('/api/books', function(request, response) {
 
 // update a book
 app.post('/api/books/:book_id', function(request, response) {
-    console.log('Updating book: ', request.params, request.body);
-
     Book.findByIdAndUpdate(request.params.book_id, {
         title: request.body.title,
         author: request.body.author,

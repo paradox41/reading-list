@@ -30,7 +30,7 @@ $body-bg:               #fff;
 $text-color:            $gray-darker;
 
 //** Global textual link color.
-$link-color:            darken($brand-primary, 20%);
+$link-color:            $brand-primary;
 //** Link hover color set via `darken()` function.
 $link-hover-color:      darken($link-color, 15%);
 
