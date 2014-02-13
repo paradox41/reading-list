@@ -25,9 +25,10 @@
         var module = angular.module(moduleName, angularDependencies);
 
         module.config(['$stateProvider', '$urlRouterProvider', 'RestangularProvider',
-            function($stateProvider, $urlRouteProvider, RestangularProvider) {
+            function($stateProvider, $urlRouterProvider, RestangularProvider) {
 
-                $urlRouteProvider.otherwise('/books');
+                $urlRouterProvider.otherwise('');
+                $urlRouterProvider.when('', '/books');
 
                 $stateProvider.state('app', {
                     url: '',
