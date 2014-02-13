@@ -27,7 +27,7 @@
         module.config(['$stateProvider', '$urlRouterProvider', 'RestangularProvider',
             function($stateProvider, $urlRouteProvider, RestangularProvider) {
 
-                $urlRouteProvider.otherwise('');
+                $urlRouteProvider.otherwise('/books');
 
                 $stateProvider.state('app', {
                     url: '',
@@ -62,7 +62,7 @@
 
         module.run(['$rootScope', '$state', '$stateParams',
             function($rootScope, $state, $stateParams) {
-                $rootScope.$state = $state;
+                $rootScope.$state       = $state;
                 $rootScope.$stateParams = $stateParams;
 
                 $rootScope.$on('$routeChangeError', function() {
