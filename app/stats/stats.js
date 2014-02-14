@@ -7,14 +7,19 @@
             'angular',
             'd3',
             'nv',
-			'ui.router'
+            'lodash',
+			'ui.router',
+            'restangular',
+            'nvd3ChartDirectives'
         ],
 
         angularDependencies = [
-            'ui.router'
+            'ui.router',
+            'restangular',
+            'nvd3ChartDirectives'
         ];
 
-    define(dependencies, function(angular, d3, nv) {
+    define(dependencies, function(angular, d3, nv, _) {
 
         var module = angular.module(moduleName, angularDependencies);
 
@@ -29,9 +34,17 @@
             }
         ]);
 
-        module.controller('StatsCtrl', ['$scope', '$state',
-            function($scope, $state) {
+        module.controller('StatsCtrl', ['$scope', '$state', 'Restangular',
+            function($scope, $state, Restangular) {
                 console.log('StatsCtrl');
+
+                Restangular.all('books').getList().then(function(books) {
+                    $scope.books = books;
+                });
+
+                $scope.totalPagesRead = function() {
+
+                };
             }
         ]);
 
