@@ -43,6 +43,7 @@
 
                 Restangular.all('books').getList().then(function(books) {
                     $scope.books = books;
+                    debugger;
                     $scope.pages = $scope._totalPagesRead();
                     $scope.totalBooks = $scope._totalBooks();
                     $scope.pagesReadOverTime = $scope._pagesReadOverTime();
@@ -55,22 +56,32 @@
                     }
                 };
 
+                // will prepare data for the chart
                 $scope._getAllFinishedDates = function() {
-                    // get all the date_finished
-                    return _($scope.books).pluck('date_finished').remove(function(item) {
-                        // won't return if the item is undefined
-                        return item;
-                    }).map(function(date) {
-                        // return the unix time
-                        return Date.parse(date);
-                    }).value().sort(function(a, b) {
-                        return new Date(a) - new Date(b);
+                    var array = [];
+
+                    var books = _.filter($scope.books, function(book) {
+                        return book.date_finished && book.number_of_pages;
                     });
 
-                    // return _.map(bookFinished, function(date) {
-                    //     // return d3.time.format('%x')(new Date(date));
-                    //     return new Date(date).getMonth();
-                    // });
+                    var pages = _.map(books, function(book) {
+                        return book.number_of_pages;
+                    });
+
+                    var dates = _.map(books, function(book) {
+                        return Date.parse(book.date_finished);
+                    });
+
+                    var years = _(dates).groupBy(function(date) {
+                        return new Date(date).getFullYear();
+                    }).keys().forEach(function(key) {
+                        array.push({
+                            "key": key,
+                            "values": []
+                        });
+                    });
+
+                    console.log(array);
                 };
 
                 $scope._totalPagesRead = function() {
