@@ -1,23 +1,33 @@
 <div class="col-md-12">
+    <div class="col-md-12">
+        <nvd3-stacked-area-chart
+            data="pagesReadOverTime"
+            id="bigChart"
+            showXAxis="true"
+            showYAxis="true"
+            height="500">
+            <svg></svg>
+        </nvd3-stacked-area-chart>
+    </div>
     <div class="col-md-4">
         <div class="panel panel-default">
-            <div class="panel-heading">Panel heading without title</div>
+            <div class="panel-heading">Total Pages Read</div>
             <div class="panel-body">
-                Panel content
+                {{pages}}
             </div>
         </div>
     </div>
     <div class="col-md-4">
         <div class="panel panel-default">
-            <div class="panel-heading">Panel heading without title</div>
+            <div class="panel-heading">Total Books Read</div>
             <div class="panel-body">
-                Panel content
+                {{totalBooks}}
             </div>
         </div>
     </div>
     <div class="col-md-4">
         <div class="panel panel-default">
-            <div class="panel-heading">Panel heading without title</div>
+            <div class="panel-heading">Total books read in {{currentYear}}</div>
             <div class="panel-body">
                 Panel content
             </div>
