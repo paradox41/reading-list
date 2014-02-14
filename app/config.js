@@ -16,17 +16,28 @@ require.config({
 
         // Utility libraries
         'lodash': 'bower_components/lodash/dist/lodash',
-        'moment': 'bower_components/moment/moment'
+        'moment': 'bower_components/moment/moment',
+
+        // charting libraries
+        'd3': 'bower_components/d3/d3',
+        'nv': 'bower_components/nvd3/nv.d3'
     },
     shim: {
         'angular': {
             exports: 'angular'
         },
-        'restangular': ['angular', 'lodash'],
-        'ui.router': ['angular'],
-        'ui.bootstrap': ['angular'],
         'lodash': {
             exports: '_'
-        }
+        },
+        'd3': {
+            exports: 'd3'
+        },
+        'nv': {
+            exports: 'nv',
+            deps: ['d3']
+        },
+        'restangular': ['angular', 'lodash'],
+        'ui.router': ['angular'],
+        'ui.bootstrap': ['angular']
     }
 });

@@ -5,6 +5,8 @@
 
         dependencies = [
             'angular',
+            'd3',
+            'nv',
 			'ui.router'
         ],
 
@@ -12,7 +14,7 @@
             'ui.router'
         ];
 
-    define(dependencies, function(angular) {
+    define(dependencies, function(angular, d3, nv) {
 
         var module = angular.module(moduleName, angularDependencies);
 
