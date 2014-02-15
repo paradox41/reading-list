@@ -50,7 +50,21 @@
 
                 $scope.dateFormat = function() {
                     return function(d) {
-                        return d3.time.format('%x')(new Date(d[0]));
+                        return d3.time.format('%B')(new Date(d[0]));
+                    };
+                };
+
+                $scope.removeDecimal = function() {
+                    return function(d) {
+                        return d3.round(d);
+                    };
+                };
+
+                var colorArray = ['#A62A2A', '#FF7474', '#F35656', '#1AA641', '#56F382'];
+
+                $scope.colorFunction = function() {
+                    return function(d, i) {
+                        return colorArray[i];
                     };
                 };
 
@@ -62,7 +76,7 @@
 
                     _.forEach(books, function(book) {
                         if (book.date_finished && book.number_of_pages) {
-                            var year = new Date(book.date_finished).getFullYear();
+                            var year = d3.time.format('%B')(new Date(book.date_finished));
                             var item = _.find(array, { 'key': year });
 
                             if (!item) {

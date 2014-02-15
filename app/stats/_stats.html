@@ -1,13 +1,16 @@
 <div class="col-md-12">
-    <pre>{{pagesReadOverTime}}</pre>
     <div class="col-md-12">
-        <div nvd3-stacked-area-chart
+        <div nvd3-multi-bar-chart
             data="pagesReadOverTime"
             id="bigChart"
             showXAxis="true"
             showYAxis="true"
             height="500"
-            x="dateFormat()">
+            xAxisTickFormat="dateFormat()"
+            yAxisTickFormat="removeDecimal()"
+            color="colorFunction()",
+            showLegend="true"
+            legendColor="colorFunction()">
             <svg></svg>
         </div>
     </div>
