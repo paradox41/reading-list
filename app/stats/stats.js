@@ -58,7 +58,9 @@
                 $scope._pagesReadOverTime = function() {
                     var array = [];
 
-                    _.forEach($scope.books, function(book) {
+                    var books = _.map(_.sortBy($scope.books, 'date_finished'));
+
+                    _.forEach(books, function(book) {
                         if (book.date_finished && book.number_of_pages) {
                             var year = new Date(book.date_finished).getFullYear();
                             var item = _.find(array, { 'key': year });
