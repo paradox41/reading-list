@@ -51,7 +51,7 @@
                 $scope.dateFormat = function() {
                     return function(d) {
                         return d3.time.format('%x')(new Date(d[0]));
-                    }
+                    };
                 };
 
                 // will prepare data for the chart
