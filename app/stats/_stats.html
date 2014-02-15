@@ -1,6 +1,7 @@
 <div class="col-md-12">
+    <pre>{{pagesReadOverTime}}</pre>
     <div class="col-md-12">
-        <nvd3-stacked-area-chart
+        <div nvd3-stacked-area-chart
             data="pagesReadOverTime"
             id="bigChart"
             showXAxis="true"
@@ -8,7 +9,7 @@
             height="500"
             x="dateFormat()">
             <svg></svg>
-        </nvd3-stacked-area-chart>
+        </div>
     </div>
     <div class="col-md-4">
         <div class="panel panel-default">
