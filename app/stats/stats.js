@@ -42,46 +42,40 @@
                 $scope.currentYear = new Date().getFullYear();
 
                 Restangular.all('books').getList().then(function(books) {
-                    $scope.books = books;
-                    debugger;
-                    $scope.pages = $scope._totalPagesRead();
-                    $scope.totalBooks = $scope._totalBooks();
+                    $scope.books             = books;
+                    $scope.pages             = $scope._totalPagesRead();
+                    $scope.totalBooks        = $scope._totalBooks();
                     $scope.pagesReadOverTime = $scope._pagesReadOverTime();
                 });
 
                 $scope.dateFormat = function() {
                     return function(d) {
-                        // this is broken
                         return d3.time.format('%x')(new Date(d[0]));
                     }
                 };
 
                 // will prepare data for the chart
-                $scope._getAllFinishedDates = function() {
+                $scope._pagesReadOverTime = function() {
                     var array = [];
 
-                    var books = _.filter($scope.books, function(book) {
-                        return book.date_finished && book.number_of_pages;
-                    });
+                    _.forEach($scope.books, function(book) {
+                        if (book.date_finished && book.number_of_pages) {
+                            var year = new Date(book.date_finished).getFullYear();
+                            var item = _.find(array, { 'key': year });
 
-                    var pages = _.map(books, function(book) {
-                        return book.number_of_pages;
-                    });
-
-                    var dates = _.map(books, function(book) {
-                        return Date.parse(book.date_finished);
-                    });
-
-                    var years = _(dates).groupBy(function(date) {
-                        return new Date(date).getFullYear();
-                    }).keys().forEach(function(key) {
-                        array.push({
-                            "key": key,
-                            "values": []
-                        });
+                            if (!item) {
+                                array.push({
+                                    'key': year,
+                                    'values': [[Date.parse(book.date_finished), book.number_of_pages]]
+                                });
+                            } else {
+                                item.values.push([Date.parse(book.date_finished), book.number_of_pages]);
+                            }
+                        }
                     });
 
                     console.log(array);
+                    return array;
                 };
 
                 $scope._totalPagesRead = function() {
@@ -92,30 +86,6 @@
 
                 $scope._totalBooks = function() {
                     return $scope.books.length;
-                };
-
-                $scope._pagesReadOverTime = function() {
-                    var container = [];
-                    var values    = [];
-                    var dates     = $scope._getAllFinishedDates();
-
-                    for (var i = 0; i < dates.length; i++) {
-                        container.push([dates[i], i]);
-                    }
-
-                    // _.forEach($scope.books, function(book) {
-                    //     values.push([
-                    //         Date.parse(book.date_finished),
-                    //         book.number_of_pages
-                    //     ]);
-                    // });
-
-                    // container.push({
-                    //     'key': $scope.currentYear,
-                    //     'values': values
-                    // });
-
-                    return [{ 'key': '2014', 'values': container }];
                 };
             }
         ]);
