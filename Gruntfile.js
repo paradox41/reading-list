@@ -72,7 +72,8 @@ module.exports = function (grunt) {
         jshint: {
             options: {
                 jshintrc: '.jshintrc',
-                ignores: ignorePatterns
+                ignores: ignorePatterns,
+                reporter: require('jshint-stylish')
             },
             all: jsPatterns
         },
