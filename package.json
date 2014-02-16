@@ -10,7 +10,7 @@
     "email": "will@coefficientinc.com"
   },
   "files": [],
-  "main": "app/server.js",
+  "main": "server.js",
   "repository": "",
   "devDependencies": {
     "grunt": "~0.4.1",
