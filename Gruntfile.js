@@ -26,6 +26,37 @@ module.exports = function (grunt) {
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        // https://github.com/nDmitry/grunt-autoprefixer
+        autoprefixer: {
+            options: {
+                browsers: [
+                    '> 5%',
+                    'last 2 versions',
+                ],
+                map: true
+            },
+            src: 'app/app.css',
+            dest: 'app/app.css'
+        },
+        // https://github.com/sindresorhus/grunt-concurrent
+        concurrent: {
+            tasks: [
+                'nodemon:dev',
+                'watch:development'
+            ],
+            options: {
+                logConcurrentOutput: true
+            }
+        },
+        // https://github.com/gruntjs/grunt-contrib-jshint
+        jshint: {
+            options: {
+                jshintrc: '.jshintrc',
+                ignores: ignorePatterns,
+                reporter: require('jshint-stylish')
+            },
+            all: jsPatterns
+        },
         meta: {
             banner: '/*!\n' +
                 '* <%= pkg.name %>\n' +
@@ -35,6 +66,30 @@ module.exports = function (grunt) {
                 '* (c) <%= pkg.author.name %>;' +
                 ' <%= pkg.license %> License\n' +
                 '*/\n'
+        },
+        // https://github.com/ChrisWren/grunt-nodemon
+        nodemon: {
+            'dev': {
+                options: {
+                    file: 'server.js',
+                    nodeArgs: ['--debug'],
+                    env: {
+                        PORT: '8080'
+                    }
+                }
+            }
+        },
+        // https://github.com/jsoverson/grunt-plato
+        plato: {
+            'report': {
+                options: {
+                    jshint : grunt.file.readJSON('.jshintrc'),
+                    exclude: /tests\/*/
+                },
+                files: {
+                    'plato_report/<%= grunt.template.today("yyyy-mm-dd") %>': jsPatterns
+                }
+            }
         },
         // https://github.com/sindresorhus/grunt-sass
         sass: {
@@ -58,47 +113,8 @@ module.exports = function (grunt) {
                     async: true
                 }
             },
-            'node': {
-                command: 'nodemon server.js',
-                options: {
-                    async: true
-                }
-            },
             options: {
                 stdout: true
-            }
-        },
-        // https://github.com/gruntjs/grunt-contrib-jshint
-        jshint: {
-            options: {
-                jshintrc: '.jshintrc',
-                ignores: ignorePatterns,
-                reporter: require('jshint-stylish')
-            },
-            all: jsPatterns
-        },
-        // https://github.com/nDmitry/grunt-autoprefixer
-        autoprefixer: {
-            options: {
-                browsers: [
-                    '> 5%',
-                    'last 2 versions',
-                ],
-                map: true
-            },
-            src: 'app/app.css',
-            dest: 'app/app.css'
-        },
-        // https://github.com/jsoverson/grunt-plato
-        plato: {
-            'report': {
-                options: {
-                    jshint : grunt.file.readJSON('.jshintrc'),
-                    exclude: /tests\/*/
-                },
-                files: {
-                    'plato_report/<%= grunt.template.today("yyyy-mm-dd") %>': jsPatterns
-                }
             }
         },
         // https://github.com/gruntjs/grunt-contrib-watch
@@ -118,11 +134,10 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('default', [
-        // 'shell:mongo',
-        // 'shell:node',
         'jshint',
         'sass',
         'watch:development'
+        // 'concurrent'
     ]);
 
     grunt.registerTask('reporting', [
