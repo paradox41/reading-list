@@ -3,4 +3,4 @@ node_modules/
 app/bower_components
 app.css
 app.css.map
-
+npm-debug.log
