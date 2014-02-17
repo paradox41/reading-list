@@ -42,10 +42,10 @@
                 $scope.currentYear = new Date().getFullYear();
 
                 Restangular.all('books').getList().then(function(books) {
-                    $scope.books             = books;
-                    $scope.pages             = $scope._totalPagesRead();
-                    $scope.totalBooks        = $scope._totalBooks();
-                    $scope.pagesReadOverTime = $scope._pagesReadOverTime();
+                    $scope.books      = books;
+                    $scope.pages      = $scope._totalPagesRead();
+                    $scope.totalBooks = $scope._totalBooks();
+                    $scope.chartData  = $scope.banana();
                 });
 
                 $scope.dateFormat = function() {
@@ -60,38 +60,37 @@
                     };
                 };
 
-                var colorArray = ['#A62A2A', '#FF7474', '#F35656', '#1AA641', '#56F382'];
+                var colorArray = ['#002635', '#013440', '#AB1A25', '#D97925', '#EFE7BE'];
 
                 $scope.colorFunction = function() {
                     return function(d, i) {
-                        return colorArray[i];
+                        return colorArray[i % colorArray.length];
                     };
                 };
 
-                // will prepare data for the chart
-                $scope._pagesReadOverTime = function() {
-                    var array = [];
-
+                $scope.banana = function() {
+                    var apple = [];
                     var books = _.map(_.sortBy($scope.books, 'date_finished'));
 
                     _.forEach(books, function(book) {
+                        var month = moment(book.date_finished).format('MMMM YYYY');
+                        var item  = _.find(apple, { 'key': month });
+
                         if (book.date_finished && book.number_of_pages) {
-                            var year = d3.time.format('%B')(new Date(book.date_finished));
-                            var item = _.find(array, { 'key': year });
+                            var dataPoint = [Date.parse(book.date_finished), book.number_of_pages];
 
                             if (!item) {
-                                array.push({
-                                    'key': year,
-                                    'values': [[Date.parse(book.date_finished), book.number_of_pages]]
-                                });
+                                apple.push({
+                                    'key': month,
+                                    'values': [dataPoint]
+                                })
                             } else {
-                                item.values.push([Date.parse(book.date_finished), book.number_of_pages]);
+                                item.values.push(dataPoint);
                             }
                         }
                     });
-
-                    console.log(array);
-                    return array;
+                    console.log(apple);
+                    return apple;
                 };
 
                 $scope._totalPagesRead = function() {

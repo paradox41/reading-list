@@ -1,14 +1,15 @@
 <div class="col-md-12">
     <div class="col-md-12">
-        <div nvd3-multi-bar-chart
-            data="pagesReadOverTime"
-            id="bigChart"
+        <div nvd3-discrete-bar-chart
+            data="chartData"
+            id="chart"
             showXAxis="true"
             showYAxis="true"
+            x="dateFormat()"
             height="500"
             xAxisTickFormat="dateFormat()"
             yAxisTickFormat="removeDecimal()"
-            color="colorFunction()",
+            color="colorFunction()"
             showLegend="true"
             legendColor="colorFunction()">
             <svg></svg>
@@ -32,9 +33,9 @@
     </div>
     <div class="col-md-4">
         <div class="panel panel-default">
-            <div class="panel-heading">Total books read in {{currentYear}}</div>
+            <div class="panel-heading">Average number of pages per book</div>
             <div class="panel-body">
-                Panel content
+                {{pages / totalBooks | round}}
             </div>
         </div>
     </div>

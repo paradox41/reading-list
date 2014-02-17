@@ -4,6 +4,7 @@ require.config({
     paths: {
         // modules
         'app.common.api': 'common/api',
+        'app.common.charts': 'common/charts/charts',
         'app.common.filters': 'common/filters',
         'app.books': 'books/books',
         'app.stats': 'stats/stats',
