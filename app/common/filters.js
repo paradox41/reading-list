@@ -5,12 +5,13 @@
 
         dependencies = [
             'angular',
-            'moment'
+            'moment',
+            'd3'
         ],
 
         angularDependencies = [];
 
-    define(dependencies, function(angular, moment) {
+    define(dependencies, function(angular, moment, d3) {
 
         var module = angular.module(moduleName, angularDependencies);
 
@@ -21,6 +22,16 @@
                     return defaultValue;
                 }
                 return value;
+            };
+        });
+
+        module.filter('round', function() {
+            return function(value, roundTo) {
+                roundTo = roundTo || 0;
+                if (isNaN(value)) {
+                    return '-';
+                }
+                return d3.round(value, roundTo);
             };
         });
 
