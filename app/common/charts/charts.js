@@ -24,7 +24,7 @@
                 link: function(scope, element, attrs) {
 
                 }
-            }
+            };
         });
 
         return module;

@@ -83,7 +83,7 @@
                                 apple.push({
                                     'key': month,
                                     'values': [dataPoint]
-                                })
+                                });
                             } else {
                                 item.values.push(dataPoint);
                             }
