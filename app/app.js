@@ -7,7 +7,6 @@
             'angular',
             'ui.bootstrap',
             'ui.router',
-            'restangular',
             'app.books',
             'app.stats'
         ],
@@ -15,7 +14,6 @@
         angularDependencies = [
             'ui.router',
             'ui.bootstrap',
-            'restangular',
             'app.books',
             'app.stats'
         ];
@@ -24,8 +22,8 @@
 
         var module = angular.module(moduleName, angularDependencies);
 
-        module.config(['$stateProvider', '$urlRouterProvider', 'RestangularProvider',
-            function($stateProvider, $urlRouterProvider, RestangularProvider) {
+        module.config(['$stateProvider', '$urlRouterProvider',
+            function($stateProvider, $urlRouterProvider) {
 
                 $urlRouterProvider.otherwise('');
                 $urlRouterProvider.when('', '/books');
@@ -40,17 +38,6 @@
                             template: '<div class="app clearfix" ui-view></div>'
                         }
                     }
-                });
-
-                // Restangular settings
-                RestangularProvider.setBaseUrl('api/');
-                RestangularProvider.setResponseExtractor(function(response, operation) {
-                    console.log('Response Extractor', response, operation);
-                    return response;
-                });
-                RestangularProvider.setRestangularFields({
-                    // because mongo stores _id
-                    id: '_id'
                 });
             }
         ]);

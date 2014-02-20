@@ -10,13 +10,11 @@
             'lodash',
             'moment',
             'ui.router',
-            'restangular',
             'nvd3ChartDirectives'
         ],
 
         angularDependencies = [
             'ui.router',
-            'restangular',
             'nvd3ChartDirectives'
         ];
 
@@ -35,18 +33,18 @@
             }
         ]);
 
-        module.controller('StatsCtrl', ['$scope', '$state', 'Restangular',
-            function($scope, $state, Restangular) {
+        module.controller('StatsCtrl', ['$scope', '$state',
+            function($scope, $state) {
                 console.log('StatsCtrl');
 
                 $scope.currentYear = new Date().getFullYear();
 
-                Restangular.all('books').getList().then(function(books) {
-                    $scope.books      = books;
-                    $scope.pages      = $scope._totalPagesRead();
-                    $scope.totalBooks = $scope._totalBooks();
-                    $scope.chartData  = $scope.banana();
-                });
+                // Restangular.all('books').getList().then(function(books) {
+                //     $scope.books      = books;
+                //     $scope.pages      = $scope._totalPagesRead();
+                //     $scope.totalBooks = $scope._totalBooks();
+                //     $scope.chartData  = $scope.banana();
+                // });
 
                 $scope.dateFormat = function() {
                     return function(d) {

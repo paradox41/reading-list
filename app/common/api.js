@@ -4,21 +4,17 @@
     var moduleName = 'app.api',
 
         dependencies = [
-            'angular',
-            'ngResource'
+            'angular'
         ],
 
-        angularDependencies = [
-            'ngResource'
-        ];
+        angularDependencies = [];
 
     define(dependencies, function(angular) {
 
         var module = angular.module(moduleName, angularDependencies);
 
-        module.factory('books', ['$http', '$resource',
-            function($http, $resource) {
-                var Book = $resource('/api/books');
+        module.factory('books', ['$http',
+            function($http) {
 
                 return Book;
             }

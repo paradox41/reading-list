@@ -4,37 +4,44 @@
     var moduleName = 'app.books.services',
 
         dependencies = [
-            'angular',
-            'restangular'
+            'angular'
         ],
 
-        angularDependencies = [
-            'restangular'
-        ];
+        angularDependencies = [];
 
     define(dependencies, function(angular) {
 
         var module = angular.module(moduleName, angularDependencies);
 
-        module.factory('BooksService', function() {
-            var BooksService = {};
+        module.factory('BooksService', ['$http',
+            function($http) {
+                var BooksService = {};
 
-            BooksService.getBooks = function() {
-                console.error('Not implemented yet');
-            };
+                BooksService.getBooks = function() {
+                    return $http.get('/api/books');
+                };
 
-            BooksService.updateBook = function() {
-                console.error('Not implemented yet');
-            };
+                BooksService.getBook = function(bookId) {
+                    return $http.get('/api/books/'+bookId);
+                };
 
-            BooksService.deleteBook = function() {
-                console.error('Not implemented yet');
-            };
+                BooksService.createBook = function(book) {
+                    return $http.post('/api/books', book);
+                };
 
-            return BooksService;
-        });
+                BooksService.updateBook = function(book) {
+                    console.log(book);
+                    return $http.post('/api/books/'+book.book._id, book);
+                };
+
+                BooksService.deleteBook = function(bookId) {
+                    return $http.delete('/api/books/'+bookId);
+                };
+
+                return BooksService;
+            }
+        ]);
 
         return module;
     });
 })();
-

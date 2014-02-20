@@ -2,17 +2,21 @@ require.config({
     baseUrl: '.',
     deps: ['angular', 'app'],
     paths: {
-        // modules
+        // common modules
         'app.common.api': 'common/api',
         'app.common.charts': 'common/charts/charts',
         'app.common.filters': 'common/filters',
+
+        // books
         'app.books': 'books/books',
+        'app.books.services': 'books/services',
+
+        // stats
         'app.stats': 'stats/stats',
 
         // AngularJS Modules
         'angular': 'bower_components/angular/angular',
         'nvd3ChartDirectives': 'bower_components/angularjs-nvd3-directives/dist/angularjs-nvd3-directives',
-        'restangular': 'bower_components/restangular/dist/restangular',
         'ui.bootstrap': 'bower_components/angular-bootstrap/ui-bootstrap-tpls',
         'ui.router': 'bower_components/angular-ui-router/release/angular-ui-router',
 
@@ -39,7 +43,6 @@ require.config({
             deps: ['d3']
         },
         'nvd3ChartDirectives': ['angular', 'd3', 'nv'],
-        'restangular': ['angular', 'lodash'],
         'ui.router': ['angular'],
         'ui.bootstrap': ['angular']
     }
