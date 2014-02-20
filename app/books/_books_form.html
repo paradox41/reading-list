@@ -6,16 +6,19 @@
     </ul>
 </div> -->
 <div class="col-md-12">
+    <div class="alert" ng-if="feedback.hasFeedback" ng-class="{ 'alert-success': feedback.status === 'success', 'alert-danger': feedback.status === 'danger'}">
+        <p>{{feedback.message}}</p>
+    </div>
     <form role="form" ng-submit="saveBook()">
         <fieldset>
             <legend>What have you read lately?</legend>
             <div class="form-group">
                 <label for="Title">Title</label>
-                <input type="text" class="form-control" placeholder="Book title" ng-model="book.title">
+                <input type="text" class="form-control" placeholder="Book title" ng-model="book.title" required>
             </div>
             <div class="form-group">
                 <label for="Author">Author</label>
-                <input type="text" class="form-control" placeholder="Book author" ng-model="book.author">
+                <input type="text" class="form-control" placeholder="Book author" ng-model="book.author" required>
             </div>
             <div class="form-group">
                 <label for="Number of pages">Number of pages</label>
@@ -24,7 +27,14 @@
             <div class="form-group">
                 <label for="Date started">Date started</label>
                 <p class="input-group">
-                    <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="book.date_started" is-open="openedStart" ng-required="true" close-text="Close" />
+                    <input type="text" class="form-control"
+                        datepicker-popup="{{format}}"
+                        show-weeks="false"
+                        show-button-bar="false"
+                        ng-model="book.date_started"
+                        is-open="openedStart"
+                        ng-required="true"
+                        close-text="Close">
                     <span class="input-group-btn">
                         <button class="btn btn-default" ng-click="openStart($event)">
                             <i class="glyphicon glyphicon-calendar"></i>
@@ -35,7 +45,15 @@
             <div class="form-group">
                 <label for="Date finished">Date finished</label>
                 <p class="input-group">
-                    <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="book.date_finished" is-open="openedFinish" min="book.date_started" max="maxDate" close-text="Close" />
+                    <input type="text" class="form-control"
+                        datepicker-popup="{{format}}"
+                        show-weeks="false"
+                        show-button-bar="false"
+                        ng-model="book.date_finished"
+                        is-open="openedFinish"
+                        min="book.date_started"
+                        max="maxDate"
+                        close-text="Close">
                     <span class="input-group-btn">
                         <button class="btn btn-default" ng-click="openFinish($event)">
                             <i class="glyphicon glyphicon-calendar"></i>
