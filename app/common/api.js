@@ -15,7 +15,7 @@
 
         module.factory('books', ['$http',
             function($http) {
-
+                var Book = {};
                 return Book;
             }
         ]);
