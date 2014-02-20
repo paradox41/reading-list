@@ -9,6 +9,8 @@ require.config({
 
         // books
         'app.books': 'books/books',
+        'app.books.edit': 'books/edit/edit',
+        'app.books.new': 'books/new/new',
         'app.books.services': 'books/services',
 
         // stats
