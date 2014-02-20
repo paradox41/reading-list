@@ -9,6 +9,8 @@
             'lodash',
             'ui.router',
             'ui.bootstrap',
+            'app.books.edit',
+            'app.books.new',
             'app.common.filters',
             'app.books.services'
         ],
@@ -16,6 +18,8 @@
         angularDependencies = [
             'ui.router',
             'ui.bootstrap',
+            'app.books.edit',
+            'app.books.new',
             'app.common.filters',
             'app.books.services'
         ];
@@ -51,6 +55,7 @@
                 $scope.books   = books.data;
 
                 $scope.deleteBook = function(bookId) {
+                    console.log('clicked');
                     var index = _.findIndex($scope.books, {
                         '_id': bookId
                     });
