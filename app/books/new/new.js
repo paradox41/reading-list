@@ -35,19 +35,34 @@
             function($scope, $state, BooksService) {
                 console.log('BooksNewCtrl');
 
+                $scope.feedback = {
+                    hasFeedback: false,
+                    message: null,
+                    status: null
+                };
+
                 $scope.book = {
                     title: null,
                     author: null,
                     number_of_pages: null,
-                    date_started: null,
+                    date_started: new Date(),
                     date_finished: null,
                     created_on: new Date()
                 };
 
-                $scope.createBook = function() {
-                    BooksService.createBook($scope.book).then(function(response) {
-                        console.log(response);
-                    });
+                $scope.saveBook = function() {
+                    BooksService.createBook($scope.book).then(
+                        function success(response) {
+                            $scope.feedback.hasFeedback = true;
+                            $scope.feedback.status      = 'success';
+                            $scope.feedback.message     = 'Successfully added book';
+                        },
+                        function error(response) {
+                            $scope.feedback.hasFeedback = true;
+                            $scope.feedback.status      = 'danger';
+                            $scope.feedback.message     = response;
+                        }
+                    );
                 };
 
                 // begin datepicker options

@@ -44,8 +44,8 @@
 
                 $scope.book = book.data;
 
-                $scope.updateBook = function(book) {
-                    BooksService.updateBook(book).then(function(response) {
+                $scope.saveBook = function() {
+                    BooksService.updateBook($scope.book).then(function(response) {
                         console.log(response);
                     });
                 };
