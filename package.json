@@ -39,7 +39,8 @@
     "karma-phantomjs-launcher": "~0.1.2",
     "karma": "~0.10.9",
     "istanbul": "~0.2.4",
-    "grunt-contrib-jasmine": "~0.6.1"
+    "grunt-contrib-jasmine": "~0.6.1",
+    "grunt-node-inspector": "~0.1.2"
   },
   "engines": {
     "node": ">=0.8.0"

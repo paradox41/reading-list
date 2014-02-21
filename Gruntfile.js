@@ -1,18 +1,18 @@
 'use strict';
-module.exports = function (grunt) {
+module.exports = function(grunt) {
     // var _ = require('lodash');
     // https://github.com/sindresorhus/time-grunt
     require('time-grunt')(grunt);
     require('load-grunt-tasks')(grunt);
 
-    var sourceMapLoc   = 'app.css.map';
+    var sourceMapLoc = 'app.css.map';
 
-    var sassPatterns   = [
+    var sassPatterns = [
         'app/common/sass/*.scss',
         'app/common/sass/**/*.scss'
     ];
 
-    var jsPatterns     = [
+    var jsPatterns = [
         'Gruntfile.js',
         'app/*.js',
         'app/**/*.js',
@@ -40,12 +40,16 @@ module.exports = function (grunt) {
         },
         // https://github.com/sindresorhus/grunt-concurrent
         concurrent: {
-            tasks: [
-                'nodemon:dev',
-                'watch:development'
-            ],
-            options: {
-                logConcurrentOutput: true
+            'dev': {
+                tasks: [
+                    'nodemon:dev',
+                    'node-inspector',
+                    'watch:server',
+                    'watch:dev'
+                ],
+                options: {
+                    logConcurrentOutput: true
+                }
             }
         },
         // https://github.com/gruntjs/grunt-contrib-jshint
@@ -57,33 +61,50 @@ module.exports = function (grunt) {
             },
             all: jsPatterns
         },
-        meta: {
-            banner: '/*!\n' +
-                '* <%= pkg.name %>\n' +
-                '* v<%= pkg.version %> - ' +
-                '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
-                '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
-                '* (c) <%= pkg.author.name %>;' +
-                ' <%= pkg.license %> License\n' +
-                '*/\n'
-        },
         // https://github.com/ChrisWren/grunt-nodemon
         nodemon: {
             'dev': {
+                script: 'server.js',
                 options: {
-                    file: 'server.js',
                     nodeArgs: ['--debug'],
                     env: {
                         PORT: '8080'
+                    },
+                    // omit this property if you aren't serving HTML files and
+                    // don't want to open a browser tab on start
+                    callback: function(nodemon) {
+                        nodemon.on('log', function(event) {
+                            console.log(event.colour);
+                        });
+
+                        // opens browser on initial server start
+                        nodemon.on('config:update', function() {
+                            // Delay before server listens on port
+                            setTimeout(function() {
+                                require('open')('http://localhost:8080');
+                            }, 1000);
+                        });
+
+                        // refreshes browser when server reboots
+                        nodemon.on('restart', function() {
+                            // Delay before server listens on port
+                            setTimeout(function() {
+                                require('fs').writeFileSync('.rebooted', 'rebooted');
+                            }, 1000);
+                        });
                     }
                 }
             }
+        },
+        // https://github.com/ChrisWren/grunt-node-inspector
+        'node-inspector': {
+            dev: {}
         },
         // https://github.com/jsoverson/grunt-plato
         plato: {
             'report': {
                 options: {
-                    jshint : grunt.file.readJSON('.jshintrc'),
+                    jshint: grunt.file.readJSON('.jshintrc'),
                     exclude: /tests\/*/
                 },
                 files: {
@@ -119,16 +140,21 @@ module.exports = function (grunt) {
         },
         // https://github.com/gruntjs/grunt-contrib-watch
         watch: {
-            'development': {
+            'dev': {
                 options: {
                     interrupt: true,
                     spawn: false,
-                    livereload: true
                 },
-                files: sassPatterns,
+                files: [sassPatterns],
                 tasks: [
                     'sass:dev'
                 ]
+            },
+            'server': {
+                files: ['.rebooted'],
+                options: {
+                    livereload: true
+                }
             }
         }
     });
@@ -136,8 +162,8 @@ module.exports = function (grunt) {
     grunt.registerTask('default', [
         'jshint',
         'sass',
-        'watch:development'
-        // 'concurrent'
+        // 'watch:dev'
+        'concurrent:dev'
     ]);
 
     grunt.registerTask('reporting', [
