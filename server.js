@@ -103,14 +103,14 @@ app.delete('/api/books/:book_id', function(request, response) {
 });
 
 // Start the app by listening on <port>
-// var port = process.env.PORT || config.port;
-// app.listen(port);
-// console.log('Express app started on port ' + port);
+var port = process.env.PORT || config.port;
+app.listen(port);
+console.log('Express app started on port ' + port);
 
 // Initializing logger
 // logger.init(app, passport, mongoose);
 
 // Expose app
-// exports = module.exports = app;
-app.listen(8080);
-console.log('App listening on port 8080')
+exports = module.exports = app;
+// app.listen(8080);
+// console.log('App listening on port 8080')

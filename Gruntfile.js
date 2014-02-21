@@ -43,7 +43,6 @@ module.exports = function(grunt) {
             'dev': {
                 tasks: [
                     'nodemon:dev',
-                    'node-inspector',
                     'watch:server',
                     'watch:dev'
                 ],
@@ -95,10 +94,6 @@ module.exports = function(grunt) {
                     }
                 }
             }
-        },
-        // https://github.com/ChrisWren/grunt-node-inspector
-        'node-inspector': {
-            dev: {}
         },
         // https://github.com/jsoverson/grunt-plato
         plato: {
@@ -162,7 +157,6 @@ module.exports = function(grunt) {
     grunt.registerTask('default', [
         'jshint',
         'sass',
-        // 'watch:dev'
         'concurrent:dev'
     ]);
 
