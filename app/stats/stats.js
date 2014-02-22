@@ -10,12 +10,14 @@
             'lodash',
             'moment',
             'ui.router',
-            'nvd3ChartDirectives'
+            'app.common.charts',
+            'app.books.services'
         ],
 
         angularDependencies = [
             'ui.router',
-            'nvd3ChartDirectives'
+            'app.common.charts',
+            'app.books.services'
         ];
 
     define(dependencies, function(angular, d3, nv, _, moment) {
@@ -28,23 +30,24 @@
                 $stateProvider.state('app.stats', {
                     controller: 'StatsCtrl',
                     url: '/stats',
-                    templateUrl: 'stats/_stats.html'
+                    templateUrl: 'stats/_stats.html',
+                    resolve: {
+                        'books': ['BooksService',
+                            function(BooksService) {
+                                return BooksService.getBooks();
+                            }
+                        ]
+                    }
                 });
             }
         ]);
 
-        module.controller('StatsCtrl', ['$scope', '$state',
-            function($scope, $state) {
+        module.controller('StatsCtrl', ['$scope', '$state', 'books',
+            function($scope, $state, books) {
                 console.log('StatsCtrl');
 
+                $scope.books       = books.data;
                 $scope.currentYear = new Date().getFullYear();
-
-                // Restangular.all('books').getList().then(function(books) {
-                //     $scope.books      = books;
-                //     $scope.pages      = $scope._totalPagesRead();
-                //     $scope.totalBooks = $scope._totalBooks();
-                //     $scope.chartData  = $scope.banana();
-                // });
 
                 $scope.dateFormat = function() {
                     return function(d) {
@@ -90,16 +93,20 @@
                     console.log(apple);
                     return apple;
                 };
+                $scope.chartData = $scope.banana();
 
-                $scope._totalPagesRead = function() {
+                $scope.getPages = function() {
                     return _($scope.books).pluck('number_of_pages').reduce(function(sum, num) {
                         return sum + num;
                     });
                 };
+                $scope.pages = $scope.getPages();
 
-                $scope._totalBooks = function() {
+                $scope.getTotalBooks = function() {
                     return $scope.books.length;
                 };
+                $scope.totalBooks = $scope.getTotalBooks();
+
             }
         ]);
 
