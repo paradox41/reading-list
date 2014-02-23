@@ -10,13 +10,13 @@
             'lodash',
             'moment',
             'ui.router',
-            'app.common.charts',
+            'nvd3ChartDirectives',
             'app.books.services'
         ],
 
         angularDependencies = [
             'ui.router',
-            'app.common.charts',
+            'nvd3ChartDirectives',
             'app.books.services'
         ];
 
@@ -46,12 +46,12 @@
             function($scope, $state, books) {
                 console.log('StatsCtrl');
 
-                $scope.books       = books.data;
+                $scope.books = books.data;
                 $scope.currentYear = new Date().getFullYear();
 
                 $scope.dateFormat = function() {
                     return function(d) {
-                        return d3.time.format('%B')(new Date(d[0]));
+                        return d3.time.format('%B')(new Date(d));
                     };
                 };
 
@@ -69,31 +69,41 @@
                     };
                 };
 
-                $scope.banana = function() {
-                    var apple = [];
-                    var books = _.map(_.sortBy($scope.books, 'date_finished'));
+                $scope.getChartData = function() {
+                    var array = [];
+                    var books = _.filter(_.map(_.sortBy($scope.books, 'date_finished')), function(book) {
+                        return book.date_finished;
+                    });
 
                     _.forEach(books, function(book) {
-                        var month = moment(book.date_finished).format('MMMM YYYY');
-                        var item  = _.find(apple, { 'key': month });
+                        var year = moment(book.date_finished).format('YYYY');
+                        var key = _.find(array, {
+                            'key': year
+                        });
+                        var value = [Date.parse(book.date_finished), book.number_of_pages];
 
-                        if (book.date_finished && book.number_of_pages) {
-                            var dataPoint = [Date.parse(book.date_finished), book.number_of_pages];
-
-                            if (!item) {
-                                apple.push({
-                                    'key': month,
-                                    'values': [dataPoint]
-                                });
-                            } else {
-                                item.values.push(dataPoint);
-                            }
+                        if (!key) {
+                            array.push({
+                                'key': year,
+                                'values': [value]
+                            });
+                        } else {
+                            key.values.push(value);
                         }
                     });
-                    console.log(apple);
-                    return apple;
+
+                    return array;
                 };
-                $scope.chartData = $scope.banana();
+
+                $scope.chartData = $scope.getChartData();
+
+                $scope.banana = function() {
+                    var books = _.groupBy(_.filter(_.map(_.sortBy($scope.books, 'date_finished')), function(book) {
+                        return book.date_finished;
+                    }), function(book) {
+                        return moment(book.date_finished).format('MMMM YYYY');
+                    });
+                };
 
                 $scope.getPages = function() {
                     return _($scope.books).pluck('number_of_pages').reduce(function(sum, num) {
