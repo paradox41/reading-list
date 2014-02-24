@@ -54,6 +54,8 @@
                 $scope.reverse = true;
                 $scope.books   = books.data;
 
+                $scope.titles = _.pluck($scope.books, 'title');
+
                 $scope.deleteBook = function(bookId) {
                     console.log('clicked');
                     var index = _.findIndex($scope.books, {
