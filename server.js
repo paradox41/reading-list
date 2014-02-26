@@ -1,9 +1,9 @@
 'use strict';
 
-var express = require('express');
-var app = express();
-var mongo = require('mongodb');
+var express  = require('express');
+var mongo    = require('mongodb');
 var mongoose = require('mongoose');
+var app      = express();
 
 var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/reading-list/';
 
