@@ -2,9 +2,12 @@
 
 var express = require('express');
 var app = express();
+var mongo = require('mongodb');
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost');
+var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/reading-list/';
+
+mongoose.connect(mongoUri);
 
 app.configure(function() {
     app.use(express.static(__dirname + '/app'));
