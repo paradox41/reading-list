@@ -46,16 +46,17 @@
             function($scope, $state, books) {
                 console.log('StatsCtrl');
 
-                $scope.books = books.data;
+                $scope.books       = books.data;
                 $scope.currentYear = new Date().getFullYear();
+                $scope.totalBooks  = $scope.books.length;
 
-                $scope.dateFormat = function() {
+                $scope.formatDate = function() {
                     return function(d) {
                         return d3.time.format('%B')(new Date(d));
                     };
                 };
 
-                $scope.removeDecimal = function() {
+                $scope.round = function() {
                     return function(d) {
                         return d3.round(d);
                     };
@@ -69,7 +70,7 @@
                     };
                 };
 
-                $scope.getChartData = function() {
+                function getChartData() {
                     var array = [];
                     var books = _.filter(_.map(_.sortBy($scope.books, 'date_finished')), function(book) {
                         return book.date_finished;
@@ -93,9 +94,9 @@
                     });
 
                     return array;
-                };
+                }
 
-                $scope.chartData = $scope.getChartData();
+                $scope.chartData = getChartData();
 
                 $scope.banana = function() {
                     var books = _.groupBy(_.filter(_.map(_.sortBy($scope.books, 'date_finished')), function(book) {
@@ -105,17 +106,12 @@
                     });
                 };
 
-                $scope.getPages = function() {
+                function getPages() {
                     return _($scope.books).pluck('number_of_pages').reduce(function(sum, num) {
                         return sum + num;
                     });
-                };
-                $scope.pages = $scope.getPages();
-
-                $scope.getTotalBooks = function() {
-                    return $scope.books.length;
-                };
-                $scope.totalBooks = $scope.getTotalBooks();
+                }
+                $scope.pages = getPages();
 
             }
         ]);
