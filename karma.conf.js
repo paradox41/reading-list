@@ -5,7 +5,7 @@ module.exports = function(config) {
     config.set({
 
         // base path, that will be used to resolve files and exclude
-        basePath: './app',
+        basePath: '',
 
         // frameworks to use
         frameworks: [
@@ -22,14 +22,18 @@ module.exports = function(config) {
                 // tests
                 pattern: './tests/*Spec.js',
                 included: false
-            }, {
+            },
+
+            './app/bower_components/angular/angular.js',
+            './app/bower_components/angular-mocks/angular-mocks.js',
+
+            {
                 // libraries
                 pattern: './app/bower_components/**/*.js',
                 included: false
             },
-            './app/bower_components/angular/angular.js',
-            './app/bower_components/angular-mocks/angular-mocks.js',
-            './tests/test_main.js',
+
+            './tests/test_main.js'
         ],
 
         // list of files to exclude
