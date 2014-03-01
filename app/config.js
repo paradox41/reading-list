@@ -1,5 +1,5 @@
 require.config({
-    baseUrl: '.',
+    baseUrl: '',
     deps: ['angular', 'app'],
     paths: {
         // common modules
