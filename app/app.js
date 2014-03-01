@@ -35,7 +35,7 @@
                             templateUrl: 'common/nav/_nav.html'
                         },
                         'main': {
-                            template: '<div class="app clearfix" ui-view></div>'
+                            templateUrl: 'common/main/_main.html'
                         }
                     }
                 });

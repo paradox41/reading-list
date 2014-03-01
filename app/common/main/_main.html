@@ -1,0 +1,16 @@
+<div class="app clearfix">
+    <nav class="side-nav col-md-3">
+        <ul class="nav nav-pills nav-stacked">
+            <li ng-class="{ 'active': $state.includes('app.books') }">
+                <a href="#" ui-sref="app.books">
+                    <i class="fa fa-book"></i>Books</a>
+            </li>
+            <li ng-class="{ 'active': $state.includes('app.stats') }">
+                <a href="#" ui-sref="app.stats">
+                    <i class="fa fa-bar-chart-o"></i>Stats</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="primary-container col-md-9" ui-view></div>
+</div>
