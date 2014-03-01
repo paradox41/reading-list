@@ -51,7 +51,7 @@
                 };
 
                 $scope.saveBook = function() {
-                    BooksService.createBook($scope.book).then(
+                    BooksService.create($scope.book).then(
                         function success(response) {
                             $scope.feedback.hasFeedback = true;
                             $scope.feedback.status      = 'success';

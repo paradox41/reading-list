@@ -34,7 +34,7 @@
                     resolve: {
                         'books': ['BooksService',
                             function(BooksService) {
-                                return BooksService.getBooks();
+                                return BooksService.get();
                             }
                         ]
                     }

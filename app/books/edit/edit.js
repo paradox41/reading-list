@@ -24,7 +24,7 @@
                     resolve: {
                         'book': ['BooksService', '$stateParams',
                             function(BooksService, $stateParams) {
-                                return BooksService.getBook($stateParams.bookId);
+                                return BooksService.get($stateParams.bookId);
                             }
                         ]
                     },
@@ -45,7 +45,7 @@
                 $scope.book = book.data;
 
                 $scope.saveBook = function() {
-                    BooksService.updateBook($scope.book).then(function(response) {
+                    BooksService.update($scope.book).then(function(response) {
                         console.log(response);
                     });
                 };

@@ -17,25 +17,21 @@
             function($http) {
                 var BooksService = {};
 
-                BooksService.getBooks = function() {
-                    return $http.get('/api/books');
+                BooksService.get = function(id) {
+                    var pk = id || '';
+                    return $http.get('/api/books/'+ pk);
                 };
 
-                BooksService.getBook = function(bookId) {
-                    return $http.get('/api/books/'+bookId);
+                BooksService.create = function(book) {
+                    return $http.post('/api/books/', book);
                 };
 
-                BooksService.createBook = function(book) {
-                    return $http.post('/api/books', book);
-                };
-
-                BooksService.updateBook = function(book) {
-                    console.log(book);
+                BooksService.update = function(book) {
                     return $http.post('/api/books/'+book.book._id, book);
                 };
 
-                BooksService.deleteBook = function(bookId) {
-                    return $http.delete('/api/books/'+bookId);
+                BooksService.delete = function(id) {
+                    return $http.delete('/api/books/'+id);
                 };
 
                 return BooksService;
