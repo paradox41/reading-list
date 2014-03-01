@@ -34,6 +34,10 @@ module.exports = function(grunt) {
         'concurrent:dev'
     ]);
 
+    grunt.registerTask('test', [
+        'karma:unit'
+    ]);
+
     grunt.registerTask('reporting', [
         'plato:report'
     ]);
