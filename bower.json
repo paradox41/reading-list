@@ -14,8 +14,7 @@
     "moment": "~2.5.1",
     "d3": "~3.3.13",
     "nvd3": "~1.1.15-beta",
-    "angularjs-nvd3-directives": "~0.0.5-beta",
-    "angular-mocks": "~1.2.13"
+    "angularjs-nvd3-directives": "~0.0.5-beta"
   },
   "resolutions": {
     "d3": "~3.3.13",
@@ -23,5 +22,7 @@
     "moment": "~2.5.1",
     "nvd3": "~1.1.15-beta"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "angular-mocks": "~1.2.13"
+  }
 }
