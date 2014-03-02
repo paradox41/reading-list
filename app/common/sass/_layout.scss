@@ -27,36 +27,33 @@ $beige: #E3E5D0;
 
     .nav.nav-pills.nav-stacked {
         li {
-            position: relative;
+            @extend %flexbox;
+            @include flexbox-align-items(center);
             border-bottom: 1px solid $beige;
+
 
             + li {
                 margin-top: 0;
             }
 
-            > a {
-                color: $gray-darker;
-                text-transform: uppercase;
-                font-weight: 500;
-                padding: 1.3em;
-                padding-left: 5em;
+            .nav-icon {
+                border-right: 1px solid $beige;
+                color: #777777;
+                padding: 5%;
+                width: 60px;
+                text-align: center;
+            }
+
+            .nav-body {
+                @include flexbox-flex(1 0 0);
                 @include transition(all .4s ease-in-out);
 
-                > .fa {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    border-right: 1px solid $beige;
-                    color: #777777;
-                    padding-top: 12%;
-                    height: 100%;
-                    width: 60px;
-                    text-align: center;
-
-                    &:hover {
-                        background: $brand-warning;
-                        @include transition(all .4s ease-in-out);
-                    }
+                > a {
+                    color: $gray-darker;
+                    text-transform: uppercase;
+                    font-weight: 500;
+                    display: block;
+                    padding: 6%;
                 }
 
                 &:hover {
@@ -66,16 +63,15 @@ $beige: #E3E5D0;
 
             &.active {
 
-                > a {
-                    background: lighten($beige, 5%);
+                .nav-icon {
+                    color: #FFF;
+                    background: $brand-warning;
+                }
 
-                    > .fa {
-                        color: #FFF;
-                        background: $brand-warning;
+                .nav-body {
 
-                        &:hover {
-                            background: $brand-warning;
-                        }
+                    > a {
+                        background: lighten($beige, 5%);
                     }
                 }
             }
