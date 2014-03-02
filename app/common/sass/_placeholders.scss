@@ -1,0 +1,22 @@
+// the flexbox placeholders
+%flexbox {
+    display: -webkit-box; // old ass syntax
+    display: -ms-flexbox; // seriously IE?
+
+    // begin "modern" syntax
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: flex;
+}
+
+%inline-flex {
+    display: -webkit-inline-box; // shame on you webkit
+    display: -ms-inline-flexbox; // gonna put this here just on the off change MS decided to be consistent in their naming
+
+    // begin "modern" syntax
+    display: -webkit-inline-flex;
+    display: -moz-inline-flex;
+    display: -ms-inline-flex;
+    display: inline-flex;
+}

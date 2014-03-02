@@ -1,0 +1,290 @@
+// how to use the keyframes and animation mixin
+//
+// @include keyframes(shift-left) {
+//     0%   { left: 100px; }
+//     100% { left: 200px; }
+// }
+//
+// .object-to-animate {
+//   @include animation('shift-left .5s 1');
+// }
+//
+// For prefixed properties, this is the cleanest way to do things in terms of readability.
+// Although this does generate some extra lines, browsers just ignore properties that aren't theirs.
+// Once vendor prefixes start to disappear, we won't have to revisit the SASS, we can just change the prefixer mixin
+//
+// @include keyframes(some-prefixed-property) {
+//     from {
+//         @include prefixer(transform, rotate(360deg));
+//     }
+
+//     to {
+//         @include prefixer(transform, rotate(0deg));
+//     }
+// }
+//
+// .some-prefixed-property {
+//     @include animation('some-prefixed-property 2s linear infinite');
+// }
+
+
+@mixin animation($animate...) {
+    $max: length($animate);
+    $animations: '';
+
+    @for $i from 1 through $max {
+        $animations: #{$animations + nth($animate, $i)};
+
+        @if $i < $max {
+            $animations: #{$animations + ", "};
+        }
+    }
+    @include prefixer(animation, $animations);
+}
+
+@mixin keyframes($animation-name) {
+    @-webkit-keyframes #{$animation-name} {
+        @content;
+    }
+    @-moz-keyframes #{$animation-name} {
+        @content;
+    }
+    @-o-keyframes #{$animation-name} {
+        @content;
+    }
+    @keyframes #{$animation-name} {
+        @content;
+    }
+}
+
+// begin flexbox mixins
+// some of these mixins will have convenience placeholder methods for use with @extend
+
+// most of this taken from: https://github.com/mastastealth/sass-flex-mixin
+// Resources
+// http://css-tricks.com/snippets/css/a-guide-to-flexbox/
+// https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Flexible_boxes
+// http://caniuse.com/flexbox
+
+// Flex Containers
+// http://www.w3.org/TR/css3-flexbox/#flex-containers
+
+// display: flex | inline-flex
+// The display properties are placeholders, as they take no arguments
+
+// Flex Direction
+// http://www.w3.org/TR/css3-flexbox/#flex-direction-property
+
+// Values: row | row-reverse | column | column-reverse
+// Default: row
+
+@mixin flexbox-direction($value: row) {
+    @if $value == row-reverse {
+        -webkit-box-direction: reverse;
+        -webkit-box-orient: horizontal;
+    } @else if $value == column {
+        -webkit-box-direction: normal;
+        -webkit-box-orient: vertical;
+    } @else if $value == column-reverse {
+        -webkit-box-direction: reverse;
+        -webkit-box-orient: vertical;
+    } @else {
+        -webkit-box-direction: normal;
+        -webkit-box-orient: horizontal;
+    }
+
+    -webkit-flex-direction: $value;
+       -moz-flex-direction: $value;
+        -ms-flex-direction: $value;
+            flex-direction: $value;
+}
+
+// Flexbox Wrap
+// http://w3.org/tr/css3-flexbox/#flex-wrap-property
+
+// Values: nowrap | wrap | wrap-reverse
+// Default: nowrap
+
+@mixin flexbox-wrap($value: nowrap) {
+    -webkit-flex-wrap: $value;
+       -moz-flex-wrap: $value;
+
+    // because fuck you thats why
+    @if $value == nowrap {
+        -ms-flex-wrap: none;
+    } @else {
+        -ms-flex-wrap: $value;
+    }
+            flex-wrap: $value;
+}
+
+// Flexbox Flow
+// http://www.w3.org/TR/css3-flexbox/#flex-flow-property
+// shorthand for setting flex-direction and flex-wrap properties
+
+// Values: <flex-direction> | <flex-wrap>
+// Default: row nowrap
+
+@mixin flexbox-flow($values: (row nowrap)) {
+    -webkit-flex-flow: $values;
+       -moz-flex-flow: $values;
+        -ms-flex-flow: $values;
+            flex-flow: $values;
+}
+
+// Flexbox Order
+// http://www.w3.org/TR/css3-flexbox/#order-property
+
+// Value: int
+// Default: 0
+
+@mixin flexbox-order($value: 0) {
+    -webkit-box-ordinal-group: $value + 1;
+                -webkit-order: $value;
+                   -moz-order: $value;
+               -ms-flex-order: $value;
+                        order: $value;
+}
+
+// Flex Grow
+// http://w3.org/tr/css3-flexbox/#flex-grow-property
+
+// Value: int
+// Default: 0
+
+@mixin flexbox-grow($value: 0) {
+     -webkit-box-flex: $value;
+    -webkit-flex-grow: $value;
+       -moz-flex-grow: $value;
+    -ms-flex-positive: $value;
+            flex-grow: $value;
+}
+
+// Flex Shrink
+// http://w3.org/tr/css3-flexbox/#flex-shrink-property
+
+// Value: int
+// Default: 1
+
+@mixin flexbox-shrink($value: 1) {
+    -webkit-flex-shrink: $value;
+       -moz-flex-shrink: $value;
+      -ms-flex-negative: $value;
+            flex-shrink: $value;
+}
+
+// Flex Basis
+// http://www.w3.org/TR/css3-flexbox/#flex-basis-property
+
+// Value: <width>
+// Default: auto
+
+@mixin flexbox-basis($value: auto) {
+         -webkit-flex-basis: $value;
+            -moz-flex-basis: $value;
+    -ms-flex-preferred-size: $value;
+                 flex-basis: $value;
+}
+
+// Flex
+// http://www.w3.org/TR/css3-flexbox/#flex-property
+
+// Values: none | <flex-grow> <flex-shrink> || <flex-basis>
+// Default: See individual properties (1 1 0).
+
+@mixin flexbox-flex($grow: 1, $shrink: null, $basis: null) {
+    -webkit-box-flex: $grow;
+        -webkit-flex: $grow $shrink $basis;
+       -moz-box-flex: $grow;
+           -moz-flex: $grow $shrink $basis;
+            -ms-flex: $grow $shrink $basis;
+                flex: $grow $shrink $basis;
+}
+
+// Flexbox Justify Content
+// http://www.w3.org/TR/css3-flexbox/#justify-content-property
+
+// Values: flex-start | flex-end | center | space-between | space-around
+// Default: flex-start
+
+@mixin flexbox-justify-content($value: flex-start) {
+    @if $value == flex-start {
+        -webkit-box-pack: start;
+           -ms-flex-pack: start;
+    } @else if $value == flex-end {
+        -webkit-box-pack: end;
+           -ms-flex-pack: end;
+    } @else if $value == space-between {
+        -webkit-box-pack: justify;
+           -ms-flex-pack: justify;
+    } @else {
+        -webkit-box-pack: $value;
+           -ms-flex-pack: $value;
+    }
+
+    -webkit-justify-content: $value;
+       -moz-justify-content: $value;
+            justify-content: $value;
+}
+
+// Flexbox Align Items
+// http://w3.org/tr/css3-flexbox/#align-items-property
+
+// Values: flex-start | flex-end | center | baseline | stretch
+// Default: stretch
+
+@mixin flexbox-align-items($value: stretch) {
+    @if $value == flex-start {
+        -webkit-box-align: start;
+           -ms-flex-align: start;
+    } @else if $value == flex-end {
+        -webkit-box-align: end;
+           -ms-flex-align: end;
+    } @else {
+        -webkit-box-align: $value;
+           -ms-flex-align: $value;
+    }
+    -webkit-align-items: $value;
+       -moz-align-items: $value;
+            align-items: $value;
+}
+
+// Flexbox Align Self
+// http://www.w3.org/TR/css3-flexbox/#align-items-property
+
+// Values: auto | flex-start | flex-end | center | baseline | stretch
+// Default: auto
+
+@mixin flexbox-align-self($value: auto) {
+    @if $value == flex-start {
+        -ms-flex-item-align: start;
+    } @else if $value == flex-end {
+        -ms-flex-item-align: end;
+    } @else {
+        -ms-flex-item-align: $value;
+    }
+    -webkit-align-self: $value;
+       -moz-align-self: $value;
+            align-self: $value;
+}
+
+
+// Flexbox Align Content
+// http://w3.org/tr/css3-flexbox/#align-content-property
+
+// Values: flex-start | flex-end | center | space-between | space-around | stretch
+// Default: stretch
+
+@mixin flexbox-align-content($value: stretch) {
+    -webkit-align-content: $value;
+       -moz-align-content: $value;
+            align-content: $value;
+
+    @if $value == flex-start {
+        -ms-flex-line-pack: start;
+    } @else if $value == flex-end {
+        -ms-flex-line-pack: end;
+    } @else {
+        -ms-flex-line-pack: $value;
+    }
+}
