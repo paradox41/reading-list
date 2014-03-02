@@ -2,12 +2,20 @@
     <nav class="side-nav col-md-3">
         <ul class="nav nav-pills nav-stacked">
             <li ng-class="{ 'active': $state.includes('app.books') }">
-                <a href="#" ui-sref="app.books">
-                    <i class="fa fa-book"></i>Books</a>
+                <figure class="nav-icon">
+                    <i class="fa fa-book"></i>
+                </figure>
+                <div class="nav-body is-clickable">
+                    <a href="#" ui-sref="app.books">Books</a>
+                </div>
             </li>
             <li ng-class="{ 'active': $state.includes('app.stats') }">
-                <a href="#" ui-sref="app.stats">
-                    <i class="fa fa-bar-chart-o"></i>Stats</a>
+                <figure class="nav-icon">
+                    <i class="fa fa-bar-chart-o"></i>
+                </figure>
+                <div class="nav-body is-clickable">
+                    <a href="#" ui-sref="app.stats">Stats</a>
+                </div>
             </li>
         </ul>
     </nav>
