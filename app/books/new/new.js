@@ -20,13 +20,9 @@
             function($stateProvider) {
 
                 $stateProvider.state('app.books.new', {
+                    controller: 'BooksNewCtrl',
                     url: '/new',
-                    views: {
-                        'main@': {
-                            controller: 'BooksNewCtrl',
-                            templateUrl: 'books/_books_form.html'
-                        }
-                    }
+                    templateUrl: 'books/_books_form.html'
                 });
             }
         ]);

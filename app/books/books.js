@@ -29,8 +29,7 @@
         module.config(['$stateProvider',
             function($stateProvider) {
 
-                $stateProvider
-                .state('app.books', {
+                $stateProvider.state('app.books', {
                     controller: 'BooksCtrl',
                     url: '/books',
                     templateUrl: 'books/_books.html',

@@ -20,19 +20,15 @@
             function($stateProvider) {
 
                 $stateProvider.state('app.books.edit', {
+                    controller: 'BooksEditCtrl',
                     url: '/:bookId/edit',
+                    templateUrl: 'books/_books_form.html',
                     resolve: {
                         'book': ['BooksService', '$stateParams',
                             function(BooksService, $stateParams) {
                                 return BooksService.get($stateParams.bookId);
                             }
                         ]
-                    },
-                    views: {
-                        'main@': {
-                            controller: 'BooksEditCtrl',
-                            templateUrl: 'books/_books_form.html'
-                        }
                     }
                 });
             }
