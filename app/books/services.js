@@ -3,13 +3,11 @@
 
     var moduleName = 'app.books.services',
 
-        dependencies = [
-            'angular'
-        ],
-
         angularDependencies = [];
 
-    define(dependencies, function(angular) {
+    define([
+        'angular'
+    ], function(angular) {
 
         var module = angular.module(moduleName, angularDependencies);
 

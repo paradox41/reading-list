@@ -3,14 +3,6 @@
 
     var moduleName = 'app',
 
-        dependencies = [
-            'angular',
-            'ui.bootstrap',
-            'ui.router',
-            'app.books',
-            'app.stats'
-        ],
-
         angularDependencies = [
             'ui.router',
             'ui.bootstrap',
@@ -18,7 +10,13 @@
             'app.stats'
         ];
 
-    define(dependencies, function(angular) {
+    define([
+        'angular',
+        'ui.bootstrap',
+        'ui.router',
+        'app.books',
+        'app.stats'
+    ], function(angular) {
 
         var module = angular.module(moduleName, angularDependencies);
 

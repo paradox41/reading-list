@@ -3,15 +3,13 @@
 
     var moduleName = 'app.common.filters',
 
-        dependencies = [
-            'angular',
-            'moment',
-            'd3'
-        ],
-
         angularDependencies = [];
 
-    define(dependencies, function(angular, moment, d3) {
+    define([
+        'angular',
+        'moment',
+        'd3'
+    ], function(angular, moment, d3) {
 
         var module = angular.module(moduleName, angularDependencies);
 

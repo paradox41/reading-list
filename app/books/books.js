@@ -3,18 +3,6 @@
 
     var moduleName = 'app.books',
 
-        dependencies = [
-            'angular',
-            'moment',
-            'lodash',
-            'ui.router',
-            'ui.bootstrap',
-            'app.books.edit',
-            'app.books.new',
-            'app.common.filters',
-            'app.books.services'
-        ],
-
         angularDependencies = [
             'ui.router',
             'ui.bootstrap',
@@ -24,7 +12,17 @@
             'app.books.services'
         ];
 
-    define(dependencies, function(angular, moment, _) {
+    define([
+        'angular',
+        'moment',
+        'lodash',
+        'ui.router',
+        'ui.bootstrap',
+        'app.books.edit',
+        'app.books.new',
+        'app.common.filters',
+        'app.books.services'
+    ], function(angular, moment, _) {
 
         var module = angular.module(moduleName, angularDependencies);
 

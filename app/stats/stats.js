@@ -3,24 +3,22 @@
 
     var moduleName = 'app.stats',
 
-        dependencies = [
-            'angular',
-            'd3',
-            'nv',
-            'lodash',
-            'moment',
-            'ui.router',
-            'nvd3ChartDirectives',
-            'app.books.services'
-        ],
-
         angularDependencies = [
             'ui.router',
             'nvd3ChartDirectives',
             'app.books.services'
         ];
 
-    define(dependencies, function(angular, d3, nv, _, moment) {
+    define([
+        'angular',
+        'd3',
+        'nv',
+        'lodash',
+        'moment',
+        'ui.router',
+        'nvd3ChartDirectives',
+        'app.books.services'
+    ], function(angular, d3, nv, _, moment) {
 
         var module = angular.module(moduleName, angularDependencies);
 
