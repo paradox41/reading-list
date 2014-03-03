@@ -1,3 +1,9 @@
 .is-clickable {
     cursor: pointer;
 }
+
+// used mostly for removing the padding from columns
+.no-padding {
+    padding-left: 0;
+    padding-right: 0;
+}

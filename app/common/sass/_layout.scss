@@ -5,16 +5,36 @@ $beige: #E3E5D0;
     margin-bottom: 2em;
 }
 
-.margin-bottom {
-    margin-bottom: 2em;
+.primary-container {
+    @extend .no-padding;
+    padding-bottom: 999em;
+    margin-bottom: -999em;
+    background: $off-white-dark;
+}
+
+.content-wrapper {
+    padding: 0 15px;
 }
 
 .app {
     min-height: $min-height;
     overflow: hidden;
+}
 
-    .primary-container {
-        border-top: 3px solid $brand-warning;
+.action-bar {
+    @extend %flexbox;
+    margin-bottom: 2em;
+    border-top: 3px solid $brand-warning;
+    border-bottom: 1px solid #CECCC0;
+    background: $off-white;
+    padding: 2%;
+    @include flexbox-wrap(wrap);
+
+    > h1,
+    > div {
+        margin: 0;
+        @include flexbox-flex(1);
+        @include flexbox-align-items(center);
     }
 }
 
@@ -24,6 +44,7 @@ $beige: #E3E5D0;
     padding-bottom: 999em;
     margin-bottom: -999em;
     background: #F2F2EA;
+    border-right: 1px solid #D4D5D0;
 
     .nav.nav-pills.nav-stacked {
         li {
