@@ -49,16 +49,18 @@
                 $scope.saveBook = function() {
                     BooksService.create($scope.book).then(
                         function success(response) {
-                            $scope.feedback.hasFeedback = true;
-                            $scope.feedback.status      = 'success';
-                            $scope.feedback.message     = 'Successfully added book';
+                            $scope.setFeedback(true, 'success', 'Successfully added book');
                         },
                         function error(response) {
-                            $scope.feedback.hasFeedback = true;
-                            $scope.feedback.status      = 'danger';
-                            $scope.feedback.message     = response;
+                            $scope.setFeedback(true, 'danger', response);
                         }
                     );
+                };
+
+                $scope.setFeedback = function(hasFeedback, status, message) {
+                    $scope.feedback.hasFeedback = hasFeedback;
+                    $scope.feedback.status      = status;
+                    $scope.feedback.message     = message;
                 };
 
                 // begin datepicker options

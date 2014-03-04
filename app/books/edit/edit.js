@@ -40,10 +40,26 @@
 
                 $scope.book = book.data;
 
+                $scope.feedback = {
+                    hasFeedback: false,
+                    message: null,
+                    status: null
+                };
+
                 $scope.saveBook = function() {
-                    BooksService.update($scope.book).then(function(response) {
-                        console.log(response);
-                    });
+                    BooksService.update($scope.book).then(
+                        function success(response) {
+                            $scope.setFeedback(true, 'success', 'Successfully updated book');
+                        },
+                        function error(response) {
+                            $scope.setFeedback(true, 'danger', response);
+                        });
+                };
+
+                $scope.setFeedback = function(hasFeedback, message, status) {
+                    $scope.feedback.hasFeedback = hasFeedback;
+                    $scope.feedback.status      = message;
+                    $scope.feedback.message     = status;
                 };
 
                 // begin datepicker options
