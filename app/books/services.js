@@ -16,8 +16,8 @@
                 var BooksService = {};
 
                 BooksService.get = function(id) {
-                    var pk = id || '';
-                    return $http.get('/api/books/'+ pk);
+                    id = id || '';
+                    return $http.get('/api/books/' + id);
                 };
 
                 BooksService.create = function(book) {
@@ -25,11 +25,11 @@
                 };
 
                 BooksService.update = function(book) {
-                    return $http.post('/api/books/'+book.book._id, book);
+                    return $http.post('/api/books/' + book._id, book);
                 };
 
                 BooksService.delete = function(id) {
-                    return $http.delete('/api/books/'+id);
+                    return $http.delete('/api/books/' + id);
                 };
 
                 return BooksService;
