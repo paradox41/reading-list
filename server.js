@@ -102,6 +102,10 @@ app.delete('/api/books/:book_id', function(request, response) {
         if (error) {
             response.send(error);
         }
+
+        response.json({
+            "status": "success"
+        });
     });
 });
 
