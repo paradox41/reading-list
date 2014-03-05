@@ -10,7 +10,12 @@
             <span class="input-group-addon">
                 <i class="fa fa-search fa-2x"></i>
             </span>
-            <input type="text" class="form-control input-lg search" placeholder="Search" ng-model="search" typeahead="title for title in titles | filter:$viewValue">
+            <input type="text" class="form-control input-lg search" placeholder="Search" ng-model="search" typeahead="book as book.title for book in books | filter:$viewValue" typeahead-on-select="pill(search)">
+        </div>
+        <div class="col-md-12">
+            <div class="well">
+                <span ng-repeat="pill in pills">{{pill.title}}</span>
+            </div>
         </div>
         <table class="table table-striped table-hover">
             <thead>
@@ -34,7 +39,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="book in books | filter:search | orderBy:predicate:reverse">
+                <tr ng-repeat="book in books | filter:pills | orderBy:predicate:reverse">
                     <td>
                         <a href="" ui-sref="app.books.edit({ bookId: book._id })">{{book.title}}</a>
                     </td>

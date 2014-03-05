@@ -48,18 +48,20 @@
             function($scope, $state, BooksService, books) {
                 console.log('BooksCtrl', books);
 
-                $scope.reverse = true;
                 $scope.books   = books.data;
+                $scope.reverse = true;
+                $scope.pills   = [];
 
-                $scope.titles = _.pluck($scope.books, 'title');
+                $scope.pill = function(model) {
+                    $scope.pills.push(model);
+                };
 
                 $scope.deleteBook = function(bookId) {
-                    console.log('clicked');
                     var index = _.findIndex($scope.books, {
                         '_id': bookId
                     });
 
-                    BooksService.deleteBook(bookId).then(function(response) {
+                    BooksService.delete(bookId).then(function(response) {
                         console.log(response);
                         $scope.books.splice(index, 1);
                     });
