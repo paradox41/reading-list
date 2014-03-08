@@ -1,43 +1,45 @@
-<div class="col-md-12 no-padding">
+<div class="row">
     <div class="action-bar clearfix">
         <h1>Numbers and things</h1>
     </div>
     <div class="col-md-12">
-        <div nvd3-multi-bar-chart
-            data="chartData"
-            id="chart"
-            showXAxis="true"
-            showYAxis="true"
-            height="500"
-            xAxisTickFormat="formatDate()"
-            yAxisTickFormat="round()"
-            color="colorFunction()"
-            showLegend="true"
-            legendColor="colorFunction()">
-            <svg></svg>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">Total pages read</div>
-            <div class="panel-body">
-                {{pages}}
+        <div class="col-md-12">
+            <div nvd3-multi-bar-chart
+                data="chartData"
+                id="chart"
+                showXAxis="true"
+                showYAxis="true"
+                height="500"
+                xAxisTickFormat="formatDate()"
+                yAxisTickFormat="round()"
+                color="colorFunction()"
+                showLegend="true"
+                legendColor="colorFunction()">
+                <svg></svg>
             </div>
         </div>
-    </div>
-    <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">Total books read</div>
-            <div class="panel-body">
-                {{totalBooks}}
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">Total pages read</div>
+                <div class="panel-body">
+                    {{pages}}
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">Avg. number of pages per book</div>
-            <div class="panel-body">
-                {{pages / totalBooks | round}}
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">Total books read</div>
+                <div class="panel-body">
+                    {{totalBooks}}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">Avg. number of pages per book</div>
+                <div class="panel-body">
+                    {{pages / totalBooks | round}}
+                </div>
             </div>
         </div>
     </div>
