@@ -1,0 +1,14 @@
+.container {
+    margin-bottom: 2em;
+}
+
+.primary-container {
+    padding-bottom: 999em;
+    margin-bottom: -999em;
+    background: $off-white-dark;
+}
+
+.app {
+    min-height: $min-height;
+    overflow: hidden;
+}

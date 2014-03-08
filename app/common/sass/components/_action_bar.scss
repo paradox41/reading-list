@@ -1,0 +1,16 @@
+.action-bar {
+    @extend %flexbox;
+    margin-bottom: 2em;
+    border-top: 3px solid $brand-warning;
+    border-bottom: 1px solid #CECCC0;
+    background: $off-white;
+    padding: 2%;
+    @include flexbox-wrap(wrap);
+
+    > h1,
+    > div {
+        margin: 0;
+        @include flexbox-flex(1);
+        @include flexbox-align-items(center);
+    }
+}

@@ -16,10 +16,11 @@ module.exports = {
             'app/*.js',
             'app/**/*.js',
             'app/common/*.js',
-            'app/common/**/*.js'
+            'app/common/**/*.js',
+            '!**/bower_components/**'
         ],
         jsHintIgnore: [
-            'app/bower_components/**'
+            '**/bower_components/**'
         ]
     },
 
@@ -28,7 +29,7 @@ module.exports = {
             'app/common/sass/**',
             'app/common/sass/**/*.scss'
         ],
-        src: 'app/common/sass/app.scss',
+        src: 'app/app.scss',
         devDest: 'app/app.css',
         map: 'app/app.css.map'
     },
@@ -39,4 +40,4 @@ module.exports = {
         ],
         config: 'karma.conf.js'
     }
-}
+};
