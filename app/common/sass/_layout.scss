@@ -6,15 +6,14 @@ $beige: #E3E5D0;
 }
 
 .primary-container {
-    @extend .no-padding;
     padding-bottom: 999em;
     margin-bottom: -999em;
     background: $off-white-dark;
 }
 
-.content-wrapper {
-    padding: 0 15px;
-}
+// .content-wrapper {
+//     padding: 0 15px;
+// }
 
 .app {
     min-height: $min-height;
