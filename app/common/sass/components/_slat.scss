@@ -1,0 +1,16 @@
+.slat {
+
+    .slat-title {
+        font-weight: bold;
+        font-size: em(14, $font-size-base-no-pixel);
+    }
+
+    .slat-data-item {
+        font-size: em(13, $font-size-base-no-pixel);
+    }
+
+    .dim {
+        color: #CCC;
+        font-size: em(12, $font-size-base-no-pixel);
+    }
+}
