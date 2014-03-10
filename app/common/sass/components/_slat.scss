@@ -1,16 +1,41 @@
 .slat {
+    border-bottom: 1px solid #CCC;
+    background: hsl(0, 100%, 100%);
+    margin-bottom: 1em;
+    padding: 1em;
+    margin-left: 1em;
+    margin-right: 1em;
 
     .slat-title {
         font-weight: bold;
         font-size: em(14, $font-size-base-no-pixel);
     }
 
+    @media (max-width: $screen-sm-min) {
+        .slat-data-block {
+            border-bottom: 1px solid #CCC;
+            margin-bottom: 1em;
+        }
+
+        .slat-data-item,
+        .dim {
+            display: inline-block;
+        }
+    }
+
     .slat-data-item {
+        font-weight: bold;
         font-size: em(13, $font-size-base-no-pixel);
     }
 
     .dim {
         color: #CCC;
         font-size: em(12, $font-size-base-no-pixel);
+    }
+
+    .slat-data-item,
+    .dim {
+        margin-top: em(10, $font-size-base-no-pixel);
+        margin-bottom: em(10, $font-size-base-no-pixel)
     }
 }
