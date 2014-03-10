@@ -25,9 +25,9 @@
                 </div>
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="slat row" ng-repeat="book in books | filter:pills | orderBy:predicate:reverse">
-                    <div class="col-md-4">
+                    <div class="col-md-4 col-sm-12 col-xs-12">
                         <h4 class="slat-title">
                             <a href="" ui-sref="app.books.edit({ bookId: book._id })">{{book.title}}</a>
                         </h4>
@@ -35,9 +35,9 @@
                             {{book.author}}
                         </p>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-5 col-sm-12 col-xs-12">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="slat-data-block col-md-4 col-sm-12 col-xs-12">
                                 <h4 class="slat-data-item">
                                     {{book.number_of_pages}}
                                 </h4>
@@ -45,7 +45,7 @@
                                     Number of pages
                                 </p>
                             </div>
-                            <div class="col-md-4">
+                            <div class="slat-data-block col-md-4 col-sm-12 col-xs-12">
                                 <h4 class="slat-data-item">
                                     {{book.date_started | humanizeTime}}
                                 </h4>
@@ -53,7 +53,7 @@
                                     Date started
                                 </p>
                             </div>
-                            <div class="col-md-4">
+                            <div class="slat-data-block col-md-4 col-sm-12 col-xs-12">
                                 <h4 class="slat-data-item">
                                     {{book.date_finished | humanizeTime | default:'-'}}
                                 </h4>
@@ -63,7 +63,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 col-sm-12 col-xs-12">
                         <div class="btn-group">
                             <a class="btn btn-primary btn-small" href="" ui-sref="app.books.edit({ bookId: book._id })">Edit</a>
 
