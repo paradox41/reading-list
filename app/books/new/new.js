@@ -4,14 +4,14 @@
     var moduleName = 'app.books.new',
 
         angularDependencies = [
-        	'ui.router',
-			'app.books.services'
+            'ui.router',
+            'app.books.services'
         ];
 
     define([
         'angular',
-		'ui.router',
-		'app.books.services'
+        'ui.router',
+        'app.books.services'
     ], function(angular) {
 
         var module = angular.module(moduleName, angularDependencies);
@@ -105,4 +105,3 @@
         return module;
     });
 })();
-
