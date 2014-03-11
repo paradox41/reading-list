@@ -4,7 +4,7 @@
     var moduleName = 'app.books.new',
 
         angularDependencies = [
-            'ui.router',
+        	'ui.router',
 			'app.books.services'
         ];
 
