@@ -13,10 +13,7 @@ module.exports = {
     js: {
         files: [
             'Gruntfile.js',
-            'app/*.js',
             'app/**/*.js',
-            'app/common/*.js',
-            'app/common/**/*.js',
             '!**/bower_components/**'
         ],
         jsHintIgnore: [
@@ -26,7 +23,6 @@ module.exports = {
 
     sass: {
         files: [
-            'app/common/sass/**',
             'app/common/sass/**/*.scss'
         ],
         src: 'app/app.scss',
