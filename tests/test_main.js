@@ -9,10 +9,10 @@ for (var file in window.__karma__.files) {
 }
 
 require([
-    './base/config.js'
+    'app/config.js'
 ], function(config) {
     requirejs.config({
-        baseUrl: './base/app',
+        baseUrl: 'app',
 
         // ask Require.js to load these files (all our tests)
         deps: tests,

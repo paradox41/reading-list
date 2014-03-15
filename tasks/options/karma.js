@@ -2,11 +2,8 @@
 
 var config = require('../config');
 
-// https://github.com/ChrisWren/grunt-nodemon
+// https://github.com/karma-runner/grunt-karma
 module.exports = {
-    // options: {
-    //     files: config.tests.files
-    // },
     'unit': {
         configFile: config.tests.config,
         singleRun: true,

@@ -5,7 +5,7 @@ module.exports = function(config) {
     config.set({
 
         // base path, that will be used to resolve files and exclude
-        basePath: 'app',
+        basePath: '',
 
         // frameworks to use
         frameworks: [
@@ -15,15 +15,14 @@ module.exports = function(config) {
 
         // list of files / patterns to load in the browser
         files: [
-            '../tests/test_main.js',
+            'tests/test_main.js',
 
-            { pattern: './**/*.js', included: false }
+            { pattern: 'app/**/*.js', included: false },
+            { pattern: 'tests/**/*Spec.js', included: false }
         ],
 
         // list of files to exclude
-        exclude: [
-            'bower_components/**'
-        ],
+        exclude: [],
 
         // test results reporter to use
         // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
@@ -51,9 +50,8 @@ module.exports = function(config) {
         // - Opera (has to be installed with `npm install karma-opera-launcher`)
         // - Safari (only Mac; has to be installed with `npm install karma-safari-launcher`)
         // - PhantomJS
-        // - IE (only Windows; has to be installed with `npm install karma-ie-launcher`)
         browsers: [
-            // 'Chrome',
+            'Chrome',
             // 'ChromeCanary',
             // 'Firefox',
             // 'Safari',
