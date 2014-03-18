@@ -4,9 +4,6 @@ module.exports = function(config) {
 
     config.set({
 
-        // base path, that will be used to resolve files and exclude
-        basePath: '',
-
         // frameworks to use
         frameworks: [
             'requirejs',
@@ -15,14 +12,19 @@ module.exports = function(config) {
 
         // list of files / patterns to load in the browser
         files: [
-            'tests/test_main.js',
 
             { pattern: 'app/**/*.js', included: false },
-            { pattern: 'tests/**/*Spec.js', included: false }
+            { pattern: 'tests/*Spec.js', included: false },
+
+            // needs to be last http://karma-runner.github.io/0.10/plus/requirejs.html
+            'tests/test_main.js'
+
         ],
 
         // list of files to exclude
-        exclude: [],
+        exclude: [
+            'app/config.js'
+        ],
 
         // test results reporter to use
         // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'

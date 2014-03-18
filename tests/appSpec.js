@@ -1,9 +1,8 @@
-var mock, notify;
+'use strict';
 
 define([
-    'angular',
     'lodash'
-], function(angular, _) {
+], function(_) {
 
     describe('Testing lodash', function() {
         expect(_.size[1, 2, 3]).toEqual(3);

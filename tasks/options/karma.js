@@ -6,7 +6,5 @@ var config = require('../config');
 module.exports = {
     'unit': {
         configFile: config.tests.config,
-        singleRun: true,
-        browsers: ['PhantomJS'],
     }
 };
