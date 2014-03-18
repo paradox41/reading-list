@@ -18,6 +18,7 @@ require.config({
 
         // AngularJS Modules
         'angular': 'bower_components/angular/angular',
+        'angular.mocks': 'bower_components/angular-mocks/angular-mocks',
         'nvd3ChartDirectives': 'bower_components/angularjs-nvd3-directives/dist/angularjs-nvd3-directives',
         'ui.bootstrap': 'bower_components/angular-bootstrap/ui-bootstrap-tpls',
         'ui.router': 'bower_components/angular-ui-router/release/angular-ui-router',
@@ -34,6 +35,7 @@ require.config({
         'angular': {
             exports: 'angular'
         },
+        'angular.mocks': ['angular'],
         'lodash': {
             exports: '_'
         },
