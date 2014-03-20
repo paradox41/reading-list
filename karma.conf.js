@@ -73,8 +73,8 @@ module.exports = function(config) {
             'karma-jasmine',
             'karma-requirejs',
             'karma-chrome-launcher',
-            'karma-firefox-launcher',
-            'karma-safari-launcher',
+            // 'karma-firefox-launcher',
+            // 'karma-safari-launcher',
             'karma-phantomjs-launcher'
             // 'karma-opera-launcher'
             // 'karma-ie-launcher'
