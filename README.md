@@ -4,5 +4,5 @@ A simple app to keep track of books you've read. There will be reporting of usef
 
 ## Getting started
 
-1. Run `mondod` to get MongoDB running
+1. Run `mongod` to get MongoDB running
 2. `grunt`
